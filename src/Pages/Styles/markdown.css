@@ -1,0 +1,25 @@
+html,body{
+    margin: 0;
+    padding: 0;
+}
+.markdown{
+    height: 100vh;
+    
+    width: 40%;
+    background-image: linear-gradient(#ffecd2,#fcb69f);
+
+}
+.markArea{
+    height: 100vh;
+    padding: 4%;
+    
+
+    
+    width: 100%;
+    background-color: transparent;
+}
+textarea{
+    word-wrap: break-word;
+    border: none;
+    outline: none;
+}

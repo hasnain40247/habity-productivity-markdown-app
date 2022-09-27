@@ -1,24 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
-
+import SideBar from './Pages/SideBar';
+import { useState } from 'react';
+import MarkDownSection from './Pages/MarkDownSection';
+import Display from './Pages/Display';
+import { Provider as MarkProvider } from './Context/MarkDownContext';
+import Titles from './Pages/Titles';
 function App() {
+  const [sideOpen, setsideOpen] = useState(true)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <MarkProvider>
+
+    <div className='home'>
+    <SideBar/>
+    <Titles/>
+    <MarkDownSection/>
+    
     </div>
+    </MarkProvider>
+
   );
 }
 
