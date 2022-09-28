@@ -23,11 +23,15 @@ html,body{
     background-color: #FFFBF1 
 }
 .Header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
     position: sticky;
     width: 100%;
     top: 0;
     background-color:#FFFBF1 ;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 10px 0px;
     font-family: 'Montserrat', sans-serif;
     font-weight: normal;
 
@@ -43,7 +47,8 @@ html,body{
 
     text-align:start;
     font-size: small;
-    background-color: antiquewhite;
+    border-bottom: 0.5px solid rgb(67, 67, 67,0.2)
+
     
 }
 

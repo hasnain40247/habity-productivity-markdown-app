@@ -1,24 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
 import SideBar from './Pages/SideBar';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import MarkDownSection from './Pages/MarkDownSection';
 import Display from './Pages/Display';
-import { Provider as MarkProvider } from './Context/MarkDownContext';
 import Titles from './Pages/Titles';
 function App() {
-  const [sideOpen, setsideOpen] = useState(true)
+  const [id,setID]=useState(0)
+  const handleID=(value)=>{
+    console.log("Value:",value)
+    setID(value)
+  }
+  console.log(id)
 
   return (
-    <MarkProvider>
+   
 
     <div className='home'>
     <SideBar/>
-    <Titles/>
-    <MarkDownSection/>
+    <Titles handleID={handleID}/>
+    <MarkDownSection id={id}/>
     
     </div>
-    </MarkProvider>
 
   );
 }

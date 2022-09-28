@@ -4,12 +4,12 @@ function createWindow () {
   // Create the browser window.
   const win = new BrowserWindow({
     width: 800,
-    titleBarStyle: 'hidden',
-    titleBarOverlay: {
-      color: '#fcb69f',
-      symbolColor: '#ffecd2',
-      height: 20
-    },
+    // titleBarStyle: 'hidden',
+    // titleBarOverlay: {
+    //   color: '#fcb69f',
+    //   symbolColor: '#ffecd2',
+    //   height: 20
+    // },
     height: 600,
     webPreferences: {
       nodeIntegration: true
