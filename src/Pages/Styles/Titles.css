@@ -54,17 +54,17 @@ html,body{
 
 /* width */
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 3px;
   }
   
   /* Track */
   ::-webkit-scrollbar-track {
-    background: #434343;
+    background: #E8E9EB;
   }
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #FFFBF1;
+    background: #BBBCB6;
   }
   
   /* Handle on hover */
