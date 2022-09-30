@@ -1,71 +1,66 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-html,body{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.background{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    
-    width: 30%;
-    background-color: #FFFBF1 
+.background {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  width: 30%;
+  background-color: #fffbf1;
 }
-.titleScroll{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
+.titleScroll {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
 
-    
-    background-color: #FFFBF1 
+  background-color: #fffbf1;
 }
-.Header{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    position: sticky;
-    width: 100%;
-    top: 0;
-    background-color:#FFFBF1 ;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 10px 0px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: normal;
+.Header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  position: sticky;
+  width: 100%;
+  top: 0;
+  background-color: #fffbf1;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 10px 0px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: normal;
 
-
-    text-align: center;
+  text-align: center;
 }
-.title{
-    width: 100%;
- 
-    font-family: 'Montserrat', sans-serif;
-    font-weight: normal;
+.title {
+  width: 100%;
 
+  font-family: "Montserrat", sans-serif;
+  font-weight: normal;
 
-    text-align:start;
-    font-size: small;
-    border-bottom: 0.5px solid rgb(67, 67, 67,0.2)
-
-    
+  text-align: start;
+  font-size: small;
+  border-bottom: 0.5px solid rgb(67, 67, 67, 0.2);
 }
 
 /* width */
 ::-webkit-scrollbar {
-    width: 3px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #E8E9EB;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #BBBCB6;
-  }
-  
-  /* Handle on hover */
- 
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #272822;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #928869;
+}
+
+/* Handle on hover */
