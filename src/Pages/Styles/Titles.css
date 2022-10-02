@@ -15,7 +15,9 @@ body {
   background-color: #fffbf1;
 }
 .titleScroll {
+  box-sizing: border-box;
   height: 100vh;
+  padding: 8px;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
@@ -26,7 +28,9 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  padding: 5px 8px;
+  box-sizing: border-box;
+  justify-content: space-between;
   position: sticky;
   width: 100%;
   top: 0;
@@ -55,12 +59,12 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #272822;
+  background: #dad6cb;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #928869;
+  background: #928869
 }
 
 /* Handle on hover */

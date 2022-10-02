@@ -114,13 +114,13 @@ body {
 .Editor {
   display: flex;
   flex-direction: column;
-  width: 98%;
+  width: 99%;
   margin-left: 10px;
   background-color: red;
 
   margin-right: 10px;
 
-  height: 98%;
+  height: 99%;
 }
 .richEditor {
   font-family: "Montserrat", sans-serif;

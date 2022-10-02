@@ -5,6 +5,7 @@ import { IoIosCreate } from "react-icons/io";
 import { AiOutlineSortAscending } from "react-icons/ai";
 
 import { Context as MarkContext } from "../Context/MarkDownContext";
+import { FiPlusSquare } from "react-icons/fi";
 
 const ListTile = ({ id, name, handleID }) => {
   const [click, setClick] = useState(false);
@@ -31,16 +32,17 @@ const Titles = ({ handleID }) => {
   return (
     <div className="background">
       <div className="Header">
-        <AiOutlineSortAscending />
+        <AiOutlineSortAscending  style={{
+            fontSize:"20px"
+          }}  />
         <h5>NoteBook Title</h5>
-        <button
-          onClick={() => {
+      
+          <FiPlusSquare style={{
+            fontSize:"20px"
+          }}  onClick={() => {
             console.log("Pressed");
             addPage();
-          }}
-        >
-          <IoIosCreate />
-        </button>
+          }}/>
       </div>
 
       <div className="titleScroll">
