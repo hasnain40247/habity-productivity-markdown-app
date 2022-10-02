@@ -3,8 +3,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 const markReducer = (state, action) => {
   switch (action.type) {
-    case "markdown":
-      return { ...state, markdown: action.payload };
+    case "markdown":{
+     return
+     };
 
     case "title": {
       const index = state.findIndex(e => e.id ===  action.payload.id);                                                                   
@@ -26,9 +27,11 @@ const markReducer = (state, action) => {
 
 
 const setMarkDown = (dispatch) => {
-  return async (markdown) => {
+  return async (markdown,id) => {
+    console.log("markdown");
+    console.log(markdown)
+    console.log("id",id);
    
-dispatch({type:"markdown", payload: markdown})
   };
 };
 
@@ -47,7 +50,7 @@ console.log(uuidv4())
 let newPage={
   id: uuidv4(),
   title:"New Page",
-  markdown:""
+  markdown: ""
 }
 dispatch({type:"addPage",payload: newPage})
   }

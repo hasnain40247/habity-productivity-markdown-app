@@ -5,18 +5,19 @@ import { BsTypeBold } from "react-icons/bs";
 import { BiCode, BiDotsVerticalRounded } from "react-icons/bi";
 import { VscBold, VscItalic } from "react-icons/vsc";
 import { Context as MarkContext } from "../Context/MarkDownContext";
+import { useEditor } from "slate-react";
+import {FiBold, FiMoreVertical, FiItalic,FiUnderline, FiCode} from "react-icons/fi"
+
 const PARAGRAPH_STYLES = ["h1", "h2", "h3", "h4", "paragraph", "multiple"];
-const CHARACTER_STYLES = ["bold", "italic", "underline", "code"];
-function ToolBarButton(props) {
-  const { icon, isActive, onClick, ...otherProps } = props;
-  console.log("Style: " + icon);
-  console.log("Active: " + isActive);
+export const CHARACTER_STYLES = ["bold", "italic", "underline", "code"];
+const ToolBarButton=(props)=> {
+  const { icon,  ...otherProps } = props;
 
   let icons = {
-    bold: <BsTypeBold />,
-    code: <BiCode />,
-    italic: <VscItalic />,
-    underline: <ImUnderline />,
+    bold: <FiBold/>,
+    code: <FiCode />,
+    italic: <FiItalic />,
+    underline: <FiUnderline />,
   };
   return (
     <div
@@ -24,58 +25,17 @@ function ToolBarButton(props) {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        backgroundColor: isActive ? "#928869" : "#fefcf8",
-        color: isActive ? "#fefcf8" : "#272822",
+        // backgroundColor: isActive ? "#928869" : "#fefcf8",
+        // color: isActive ? "#fefcf8" : "#272822",
         margin: "0px 5px",
         borderRadius: "6px",
         padding: "5px",
       }}
-      onClick={onClick}
+      // onMouseDown={onMouseDown}
     >
       {icons[icon]}
     </div>
   );
 }
 
-const Toolbar = ({index}) => {
-  const [active, setActive] = useState(CHARACTER_STYLES[0]);
-  const { setMarkDown, setTitle } = useContext(MarkContext);
-  const { state } = useContext(MarkContext);
-
-  return (
-    <div className="toolBar">
-      <div className="header">
-        <input className="titleArea" type={"text"}  value={state[index].title}
-          onChange={(change) => {
-            setTitle(change.target.value, state[index].id);
-          }} />
-        <h3>
-          <BiDotsVerticalRounded />
-        </h3>
-      </div>
-      <div className="styles">
-        {CHARACTER_STYLES.map((style) => {
-          console.log("hello");
-          return (
-            <ToolBarButton
-              key={style}
-              icon={style}
-              isActive={active === style}
-              onClick={() => setActive(style)}
-            />
-          );
-        })}
-      </div>
-    </div>
-  );
-};
-// const ButtonToggle = styled(Button)`
-//   opacity: 0.7;
-//   ${({ active }) =>
-//     active &&
-//     `
-//     opacity: 1;
-//   `}
-// `;
-
-export default Toolbar;
+export default ToolBarButton
