@@ -5,7 +5,7 @@ export function OnClickHandler(event,icon,editor){
     switch(icon){
         case 'bold':{
             event.preventDefault()
-    CustomEditor.toggleBoldMark(editor)
+    CustomEditor.toggleBoldMarkBlock(editor)
 break
 
         }

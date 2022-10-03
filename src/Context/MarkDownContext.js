@@ -66,7 +66,7 @@ const addPage = (dispatch) => {
       title: "Untitled",
       markdown: [
         {
-          type: "h3",
+          type: "paragraph",
           children: [{ text: "Start Writing!" }],
         },
       ],
