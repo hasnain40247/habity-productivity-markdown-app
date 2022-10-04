@@ -9,6 +9,7 @@ import Split from 'react-split'
 import Titles from './Pages/Titles';
 function App() {
   const [id,setID]=useState(0)
+
   const handleID=(value)=>{
     console.log("Value:",value)
     setID(value)
@@ -42,7 +43,7 @@ function App() {
    }}>
     <SideBar/>
     <Titles handleID={handleID}/>
-    <MarkDownSection id={id}/>
+    <MarkDownSection  id={id}/>
     
     </Split>
 

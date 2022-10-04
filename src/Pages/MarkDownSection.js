@@ -9,6 +9,7 @@ const MarkDownSection = ({ id }) => {
   const [markdown, setMark] = useState("");
   const { setMarkDown, setTitle } = useContext(MarkContext);
   const { state } = useContext(MarkContext);
+  
   console.log(state);
 
   if (id === 0) {

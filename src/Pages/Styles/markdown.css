@@ -10,6 +10,8 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-top: 5px;
+  margin-bottom: 5px;
 
   width: 100%;
   color: #928869;

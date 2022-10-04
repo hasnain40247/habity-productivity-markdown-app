@@ -25,10 +25,65 @@ import {
   FiUnderline,
   FiDelete,
   FiTrash2,
+  FiEye,
+  FiEdit2,
+  FiBookOpen,
 } from "react-icons/fi";
 import { OnClickHandler } from "./Utilities/OnClickHandler";
 
-const SlateEditor = ({ index }) => {
+
+export const PreviewButton=({buttonstate,toggle})=>{
+ switch (buttonstate) {
+  case 0:
+    return   <div
+    onClick={toggle}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        color:  "#272822",
+        // backgroundColor: isActive ? "#928869" : "#fefcf8",
+        // color: isActive ? "#fefcf8" : "#272822",
+        margin: "0px 5px",
+        borderRadius: "6px",
+        padding: "5px",
+      }}
+      // onMouseDown={onMouseDown}
+    >
+      <FiEdit2 style={{
+        color:"#FF9494"
+      }}/>
+    </div>
+    
+    break;
+  case 1:
+    return   <div
+    onClick={toggle}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        color:  "#272822",
+        // backgroundColor: isActive ? "#928869" : "#fefcf8",
+        // color: isActive ? "#fefcf8" : "#272822",
+        margin: "0px 5px",
+        borderRadius: "6px",
+        padding: "5px",
+      }}
+      // onMouseDown={onMouseDown}
+    >
+      <FiEye style={{
+        color:"#B1B2FF"
+      }}/>
+    </div>
+    break;
+ 
+  default:
+    return
+ }
+}
+
+const SlateEditor = ({toggle, index, buttonstate }) => {
   const {
     state: pageState,
     setMarkDown,
@@ -164,20 +219,46 @@ const SlateEditor = ({ index }) => {
               setTitle(change.target.value, pageState[index].id);
             }}
           />
-          <h3>
+       
+      
+
+
+      <h3 style={{
+              display:"flex",
+              flexDirection:"row",
+              alignItems:"center",
+              justifyContent:"center",
+              borderRadius:"5px",
+              backgroundColor:"#fffbf1"
+      }}>
+      <PreviewButton  toggle={toggle} buttonstate={buttonstate} />
+
             <div
               style={{
                 cursor: "pointer",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                // backgroundColor: isActive ? "#928869" : "#fefcf8",
+                // color: isActive ? "#fefcf8" : "#272822",
+                margin: "0px 5px",
+                borderRadius: "6px",
+                padding: "5px",
               }}
               onClick={() => {
                 setClick(!click);
               }}
             >
-              <FiMoreVertical />
+              <FiMoreVertical style={{
+                color:"#928869"
+              }} />
             </div>
           </h3>
-        </div>
-        <div className="styles">
+          </div>
+
+        
+   
+     <div className="styles">
           {CHARACTER_STYLES.map((style) => {
             return (
               <ToolBarButton
@@ -188,6 +269,7 @@ const SlateEditor = ({ index }) => {
             );
           })}
         </div>
+     
       </div>
       <Editable
         className="richEditor"
@@ -217,10 +299,10 @@ const SlateEditor = ({ index }) => {
       {click ? (
         <div
           style={{
-            backgroundColor: "#928869",
+            backgroundColor: "#fffbf1",
             position: "absolute",
-            right: "1.2%",
-            top: "8%",
+            right: "0.5%",
+            top: "8.5%",
             borderRadius: "5px",
             display: "flex",
             flexDirection: "column",
