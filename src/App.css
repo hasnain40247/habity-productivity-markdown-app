@@ -5,6 +5,9 @@ html,body{
   padding: 0;
 
 }
+.gutter:hover{
+  cursor: col-resize;
+}
 .home{
   background-image: linear-gradient(#ffecd2,#fcb69f);
   height: 100vh;

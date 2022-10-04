@@ -20,11 +20,13 @@ const MarkDownSection = ({ id }) => {
   } else {
     let index = state.findIndex((e) => e.id === id);
 
-    return <>
+    return <div style={{
+      height:"100vh"
+    }}>
     
     <MarkDownTextArea index={index} />
     
-    </>;
+    </div>
   }
 };
 export default MarkDownSection;

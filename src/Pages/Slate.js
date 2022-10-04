@@ -5,10 +5,9 @@ import { Context } from "../Context/MarkDownContext";
 import { createEditor, Editor, Text, Transforms } from "slate";
 import { Slate, Editable, withReact, DefaultElement } from "slate-react";
 import initialValue from "../Utilities/initialState";
-import  Prism from 'prismjs'
-import "prismjs/components/prism-bash"
-import "prismjs/components/prism-markdown"
-
+import Prism from "prismjs";
+import "prismjs/components/prism-bash";
+import "prismjs/components/prism-markdown";
 
 import {
   BoldElement,
@@ -29,7 +28,6 @@ import {
 } from "react-icons/fi";
 import { OnClickHandler } from "./Utilities/OnClickHandler";
 
-
 const SlateEditor = ({ index }) => {
   const {
     state: pageState,
@@ -37,7 +35,6 @@ const SlateEditor = ({ index }) => {
     setTitle,
     deletePage,
   } = useContext(Context);
-
 
   const renderElement = useCallback((props) => {
     console.log("props.element.type");
@@ -51,14 +48,46 @@ const SlateEditor = ({ index }) => {
       case "h1":
         return <h1 {...props.attributes}>{props.children}</h1>;
 
-      case "link":
-        return <span style={{fontWeight:"bold"}} {...props.attributes} className={"link"}>
-        <span>*</span>
-       <span>{props.children}</span>
+      case "boldmark":
+        return (
+          <span
+            style={{ fontWeight: "bold" }}
+            {...props.attributes}
+            className={"link"}
+          >
+            <span>**</span>
+            <span>{props.children}</span>
 
-       <span>*</span>
-      </span>
-    
+            <span>**</span>
+          </span>
+        );
+
+      case "italicmark":
+        return (
+          <span
+            style={{ fontStyle: "italic" }}
+            {...props.attributes}
+            className={"link"}
+          >
+            <span>*</span>
+            <span>{props.children}</span>
+
+            <span>*</span>
+          </span>
+        );
+
+        case "listmark":
+          return (
+            <span
+              style={{ paddingLeft:"10px", display:"block" }}
+              {...props.attributes}
+              className={"link"}
+            >
+              <span>- </span>
+              <span>{props.children}</span>
+  
+            </span>
+          );
 
       default:
         return <DefaultElement {...props} />;
@@ -69,59 +98,55 @@ const SlateEditor = ({ index }) => {
     return <Leaf {...props} />;
   }, []);
 
-
   const decorate = useCallback(([node, path]) => {
-    console.log("Node: ")
-    console.log(node)
+    console.log("Node: ");
+    console.log(node);
 
-    console.log("Path: ")
-    console.log(path)
+    console.log("Path: ");
+    console.log(path);
 
-    
-    const ranges = []
+    const ranges = [];
 
     if (!Text.isText(node)) {
-      return ranges
+      return ranges;
     }
 
-    const getLength = token => {
-      if (typeof token === 'string') {
-        return token.length
-      } else if (typeof token.content === 'string') {
-        return token.content.length
+    const getLength = (token) => {
+      if (typeof token === "string") {
+        return token.length;
+      } else if (typeof token.content === "string") {
+        return token.content.length;
       } else {
-        return token.content.reduce((l, t) => l + getLength(t), 0)
+        return token.content.reduce((l, t) => l + getLength(t), 0);
       }
-    }
+    };
 
-    const tokens = Prism.tokenize(node.text, Prism.languages.markdown)
-    let start = 0
+    const tokens = Prism.tokenize(node.text, Prism.languages.markdown);
+    let start = 0;
 
     for (const token of tokens) {
-      const length = getLength(token)
-      const end = start + length
+      const length = getLength(token);
+      const end = start + length;
 
-      if (typeof token !== 'string') {
-        console.log(token.type)
+      if (typeof token !== "string") {
+        console.log(token.type);
 
         ranges.push({
           [token.type]: true,
           anchor: { path, offset: start },
           focus: { path, offset: end },
-        })
+        });
       }
 
-      start = end
+      start = end;
     }
-console.log(ranges)
-    return ranges
-  }, [])
-
+    console.log(ranges);
+    return ranges;
+  }, []);
 
   const [state, setState] = useState({ value: "" });
   const [click, setClick] = useState(false);
 
-  
   return (
     <Slate
       editor={pageState[index].editor}
@@ -167,7 +192,6 @@ console.log(ranges)
       <Editable
         className="richEditor"
         decorate={decorate}
-
         renderLeaf={renderLeaf}
         renderElement={renderElement}
         onKeyDown={(event) => {
