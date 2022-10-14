@@ -1,6 +1,7 @@
 import React from "react";
-import { Editor, Element, Range, Text, Transforms } from "slate";
+import { Editor, Element, Range, Text, Transforms, Document } from "slate";
 import { css } from "@emotion/css";
+
 export const CodeElement = (props) => {
   return (
     <pre {...props.attributes}>
@@ -41,53 +42,58 @@ export const Leaf = (props) => {
   //     {props.children}
   //   </span>
   // );
-  const { attributes, children, leaf } = props;
-  console.log(leaf);
+  const { attributes, children, leaf, editor } = props;
+  console.log(editor);
+  console.log("NEXT LETTER");
+  console.log(leaf.text[leaf.text.length - 1]);
+  if (editor.selection && Range.isCollapsed(editor.selection)) {
+    Editor.removeMark(editor, "bold");
+    Editor.removeMark(editor, "italic");
+
+  }
+
   return (
     <span
       {...attributes}
       className={css`
-        font-weight: ${leaf.bold && "bold"};
-        font-style: ${leaf.italic && "italic"};
-        text-decoration: ${leaf.underlined && "underline"};
+        font-weight: ${leaf.bold && 'bold'};
+        font-style: ${leaf.italic && 'italic'};
+        text-decoration: ${leaf.underlined && 'underline'};
         ${leaf.title &&
-        css`
-          display: inline-block;
-          font-weight: bold;
-          font-size: 20px;
-          margin: 20px 0 10px 0;
-        `}
+          css`
+            display: inline-block;
+            font-weight: bold;
+            font-size: 20px;
+            margin: 20px 0 10px 0;
+          `}
         ${leaf.list &&
-        css`
-          padding-left: 10px;
-          font-size: 20px;
-          line-height: 10px;
-        `}
-    ${leaf.hr &&
-        css`
-          display: block;
-          text-align: center;
-          border-bottom: 2px solid #ddd;
-        `}
-    ${leaf.blockquote &&
-        css`
-          display: inline-block;
-          border-left: 2px solid #ddd;
-          padding-left: 10px;
-          color: #aaa;
-          font-style: italic;
-        `}
-    ${leaf.code &&
-        css`
-          font-family: monospace;
-          background-color: #928869;
-          color: #fefcf8;
-          padding: 3px;
-          margin: 2px
-        `}
+          css`
+            padding-left: 10px;
+            font-size: 20px;
+            line-height: 10px;
+          `}
+        ${leaf.hr &&
+          css`
+            display: block;
+            text-align: center;
+            border-bottom: 2px solid #ddd;
+          `}
+        ${leaf.blockquote &&
+          css`
+            display: inline-block;
+            border-left: 2px solid #ddd;
+            padding-left: 10px;
+            color: #aaa;
+            font-style: italic;
+          `}
+        ${leaf.code &&
+          css`
+            font-family: monospace;
+            background-color: #eee;
+            padding: 3px;
+          `}
       `}
     >
-      
       {children}
     </span>
   );
@@ -97,37 +103,38 @@ export const CustomEditor = {
   isMarkActive(editor, mark) {
     const [match] = Editor.nodes(editor, {
       match: function (n) {
-        console.log(n.type)
+        console.log(n.type);
         switch (mark) {
           case "bold":
-            return isBoldNodeAtSelection(editor,editor.selection);
+            return CustomEditor.isBoldMarkActive(editor);
             break;
 
           case "italic":
-            return isBoldNodeAtSelection(editor,editor.selection);
+            return isBoldNodeAtSelection(editor, editor.selection);
 
             break;
           case "underline":
             return n.underlined === true;
             break;
-            case "code":
+          case "code":
             return n.code === true;
             break;
 
-            case "list":
-            return isListNodeAtSelection(editor,editor.selection);
-break
+          case "list":
+            return isListNodeAtSelection(editor, editor.selection);
+            break;
         }
       },
       universal: true,
     });
-console.log("The mark "+mark+" is "+!!match)
+    console.log("The mark " + mark + " is " + !!match);
     return !!match;
   },
 
   isCodeBlockActive(editor) {
     const [match] = Editor.nodes(editor, {
-      match: (n) => n.code === true, universal:true
+      match: (n) => n.code === true,
+      universal: true,
     });
 
     return !!match;
@@ -148,12 +155,13 @@ console.log("The mark "+mark+" is "+!!match)
 
     return !!match;
   },
+
   isBoldMarkActive(editor) {
     const [match] = Editor.nodes(editor, {
       match: (n) => n.bold === true,
       universal: true,
     });
-    console.log(match);
+
     return !!match;
   },
 
@@ -183,28 +191,26 @@ console.log("The mark "+mark+" is "+!!match)
     //   { match: (n) => Editor.isBlock(editor, n) }
     // );
 
-    console.log(editor)
+    console.log(editor);
     editor.isInline = (element) => ["listmark"].includes(element.type);
-    console.log(editor)
-
+    console.log(editor);
 
     if (!isListNodeAtSelection(editor, editor.selection)) {
-      const isSelectionCollapsed =
-        Range.isCollapsed(editor.selection);
+      const isSelectionCollapsed = Range.isCollapsed(editor.selection);
       if (isSelectionCollapsed) {
         Transforms.insertNodes(
           editor,
           {
             type: "listmark",
-            
-            children: [{ text: 'listmark' }],
+
+            children: [{ text: "listmark" }],
           },
           { at: editor.selection }
         );
       } else {
         Transforms.wrapNodes(
           editor,
-          { type: "listmark", children: [{ text: '' }] },
+          { type: "listmark", children: [{ text: "" }] },
           { split: true, at: editor.selection }
         );
       }
@@ -213,7 +219,6 @@ console.log("The mark "+mark+" is "+!!match)
         match: (n) => Element.isElement(n) && n.type === "listmark",
       });
     }
-  
   },
 
   toggleUnderLineBlock(editor) {
@@ -225,81 +230,63 @@ console.log("The mark "+mark+" is "+!!match)
     );
   },
 
-  toggleBoldMarkBlock(editor) {
-    
-    console.log(editor)
-    editor.isInline = (element) => ["boldmark"].includes(element.type);
-    console.log(editor)
+  isMarkActive(editor, format) {
+    const marks = Editor.marks(editor);
+    return marks ? marks[format] === true : false;
+  },
 
+  markPrefix: {
+    bold: "**",
+    italic:"_"
+  },
+  toggleMark(editor, format) {
+    const isActive = CustomEditor.isMarkActive(editor, format);
 
-    if (!isBoldNodeAtSelection(editor, editor.selection)) {
-      const isSelectionCollapsed =
-        Range.isCollapsed(editor.selection);
-      if (isSelectionCollapsed) {
-        Transforms.insertNodes(
-          editor,
-          {
-            type: "boldmark",
-            
-            children: [{ text: 'boldmark' }],
-          },
-          { at: editor.selection }
-        );
-      } else {
-        Transforms.wrapNodes(
-          editor,
-          { type: "boldmark", children: [{ text: '' }] },
-          { split: true, at: editor.selection }
-        );
-      }
-    } else {
-      Transforms.unwrapNodes(editor, {
-        match: (n) => Element.isElement(n) && n.type === "boldmark",
+    if (isActive) {
+      Transforms.delete(editor, {
+        at: Editor.end(editor, editor.selection),
+        unit: "character",
+        distance:  format==="bold"? 2:1,
       });
+      Transforms.delete(editor, {
+        at: Editor.start(editor, editor.selection),
+        unit: "character",
+        distance: format==="bold"? 2:1,
+        reverse: true,
+      });
+      Editor.removeMark(editor, format);
+    } else {
+      Transforms.insertText(editor, CustomEditor.markPrefix[format], {
+        at: Editor.end(editor, editor.selection),
+      });
+      Transforms.insertText(editor, CustomEditor.markPrefix[format], {
+        at: Editor.start(editor, editor.selection),
+      });
+      Editor.addMark(editor, format, true);
     }
-  
-
-    
-    
-
-    // Transforms.wrapNodes(
-    //   editor,
-    //   { type: "markbold", children: [{ text: '' }] },
-    //   { split: true, at: editor.selection }
-    // );
-
-
-    // Transforms.setNodes(
-    //   editor,
-    //   { bold: isActive ? null : true },
-    //   { match: (n) => Text.isText(n), split: true }
-    // );
   },
 
   toggleItalicMark(editor) {
-   
-    console.log(editor)
+    console.log(editor);
     editor.isInline = (element) => ["italicmark"].includes(element.type);
-    console.log(editor)
-
+    console.log(editor);
 
     if (!isItalicNodeAtSelection(editor, editor.selection)) {
-      const isSelectionCollapsed =
-        Range.isCollapsed(editor.selection);
+      const isSelectionCollapsed = Range.isCollapsed(editor.selection);
       if (isSelectionCollapsed) {
         Transforms.insertNodes(
           editor,
           {
             type: "italicmark",
-            
-            children: [{ text: 'italicmark' }],
+
+            children: [{ text: "italicmark" }],
           },
           { at: editor.selection }
         );
       } else {
         Transforms.wrapNodes(
           editor,
-          { type: "italicmark", children: [{ text: '' }] },
+          { type: "italicmark", children: [{ text: "" }] },
           { split: true, at: editor.selection }
         );
       }
@@ -309,9 +296,7 @@ console.log("The mark "+mark+" is "+!!match)
       });
     }
   },
-  
 };
-
 
 export function isBoldNodeAtSelection(editor, selection) {
   if (selection == null) {
@@ -321,7 +306,10 @@ export function isBoldNodeAtSelection(editor, selection) {
   return (
     Editor.above(editor, {
       at: selection,
-      match: (n) => n.type === "boldmark",
+      match: function (n) {
+        console.log(n);
+        return n.bold === true;
+      },
     }) != null
   );
 }

@@ -1,17 +1,18 @@
 import { CustomEditor } from "./RenderElements";
 
 export function OnClickHandler(event,icon,editor){
+    console.log("SELECTION")
     console.log(editor.selection)
     switch(icon){
         case 'bold':{
             event.preventDefault()
-    CustomEditor.toggleBoldMarkBlock(editor)
+    CustomEditor.toggleMark(editor,"bold")
 break
 
         }
         case 'italic':{
             event.preventDefault()
-    CustomEditor.toggleItalicMark(editor)
+    CustomEditor.toggleMark(editor,"italic")
 break
 
         }

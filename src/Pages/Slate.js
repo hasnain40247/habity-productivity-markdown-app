@@ -31,59 +31,66 @@ import {
 } from "react-icons/fi";
 import { OnClickHandler } from "./Utilities/OnClickHandler";
 
+export const PreviewButton = ({ buttonstate, toggle }) => {
+  switch (buttonstate) {
+    case 0:
+      return (
+        <div
+          onClick={toggle}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            color: "#272822",
+            // backgroundColor: isActive ? "#928869" : "#fefcf8",
+            // color: isActive ? "#fefcf8" : "#272822",
+            margin: "0px 5px",
+            borderRadius: "6px",
+            padding: "5px",
+          }}
+          // onMouseDown={onMouseDown}
+        >
+          <FiEdit2
+            style={{
+              color: "#FF9494",
+            }}
+          />
+        </div>
+      );
 
-export const PreviewButton=({buttonstate,toggle})=>{
- switch (buttonstate) {
-  case 0:
-    return   <div
-    onClick={toggle}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        color:  "#272822",
-        // backgroundColor: isActive ? "#928869" : "#fefcf8",
-        // color: isActive ? "#fefcf8" : "#272822",
-        margin: "0px 5px",
-        borderRadius: "6px",
-        padding: "5px",
-      }}
-      // onMouseDown={onMouseDown}
-    >
-      <FiEdit2 style={{
-        color:"#FF9494"
-      }}/>
-    </div>
-    
-    break;
-  case 1:
-    return   <div
-    onClick={toggle}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        color:  "#272822",
-        // backgroundColor: isActive ? "#928869" : "#fefcf8",
-        // color: isActive ? "#fefcf8" : "#272822",
-        margin: "0px 5px",
-        borderRadius: "6px",
-        padding: "5px",
-      }}
-      // onMouseDown={onMouseDown}
-    >
-      <FiEye style={{
-        color:"#B1B2FF"
-      }}/>
-    </div>
-    break;
- 
-  default:
-    return
- }
-}
+      break;
+    case 1:
+      return (
+        <div
+          onClick={toggle}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            color: "#272822",
+            // backgroundColor: isActive ? "#928869" : "#fefcf8",
+            // color: isActive ? "#fefcf8" : "#272822",
+            margin: "0px 5px",
+            borderRadius: "6px",
+            padding: "5px",
+          }}
+          // onMouseDown={onMouseDown}
+        >
+          <FiEye
+            style={{
+              color: "#B1B2FF",
+            }}
+          />
+        </div>
+      );
+      break;
 
-const SlateEditor = ({toggle, index, buttonstate }) => {
+    default:
+      return;
+  }
+};
+
+const SlateEditor = ({ toggle, index, buttonstate }) => {
   const {
     state: pageState,
     setMarkDown,
@@ -101,7 +108,11 @@ const SlateEditor = ({toggle, index, buttonstate }) => {
       case "list":
         return <ListElement {...props} />;
       case "h1":
-        return <h1 {...props.attributes}>{props.children}</h1>;
+        return (
+          <strong className="spanss" {...props.attributes}>
+            **{props.children}**
+          </strong>
+        );
 
       case "boldmark":
         return (
@@ -131,18 +142,17 @@ const SlateEditor = ({toggle, index, buttonstate }) => {
           </span>
         );
 
-        case "listmark":
-          return (
-            <span
-              style={{ paddingLeft:"10px", display:"block" }}
-              {...props.attributes}
-              className={"link"}
-            >
-              <span>- </span>
-              <span>{props.children}</span>
-  
-            </span>
-          );
+      case "listmark":
+        return (
+          <span
+            style={{ paddingLeft: "10px", display: "block" }}
+            {...props.attributes}
+            className={"link"}
+          >
+            <span>- </span>
+            <span>{props.children}</span>
+          </span>
+        );
 
       default:
         return <DefaultElement {...props} />;
@@ -150,7 +160,7 @@ const SlateEditor = ({toggle, index, buttonstate }) => {
   }, []);
 
   const renderLeaf = useCallback((props) => {
-    return <Leaf {...props} />;
+    return <Leaf {...props} editor={pageState[index].editor} />;
   }, []);
 
   const decorate = useCallback(([node, path]) => {
@@ -177,6 +187,8 @@ const SlateEditor = ({toggle, index, buttonstate }) => {
     };
 
     const tokens = Prism.tokenize(node.text, Prism.languages.markdown);
+    console.log("TOKENS");
+    console.log(tokens);
     let start = 0;
 
     for (const token of tokens) {
@@ -219,19 +231,18 @@ const SlateEditor = ({toggle, index, buttonstate }) => {
               setTitle(change.target.value, pageState[index].id);
             }}
           />
-       
-      
 
-
-      <h3 style={{
-              display:"flex",
-              flexDirection:"row",
-              alignItems:"center",
-              justifyContent:"center",
-              borderRadius:"5px",
-              backgroundColor:"#fffbf1"
-      }}>
-      <PreviewButton  toggle={toggle} buttonstate={buttonstate} />
+          <h3
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: "5px",
+              backgroundColor: "#fffbf1",
+            }}
+          >
+            <PreviewButton toggle={toggle} buttonstate={buttonstate} />
 
             <div
               style={{
@@ -249,16 +260,16 @@ const SlateEditor = ({toggle, index, buttonstate }) => {
                 setClick(!click);
               }}
             >
-              <FiMoreVertical style={{
-                color:"#928869"
-              }} />
+              <FiMoreVertical
+                style={{
+                  color: "#928869",
+                }}
+              />
             </div>
           </h3>
-          </div>
+        </div>
 
-        
-   
-     <div className="styles">
+        <div className="styles">
           {CHARACTER_STYLES.map((style) => {
             return (
               <ToolBarButton
@@ -269,10 +280,9 @@ const SlateEditor = ({toggle, index, buttonstate }) => {
             );
           })}
         </div>
-     
       </div>
       <Editable
-        className="richEditor"
+        className="richEditor markfont"
         decorate={decorate}
         renderLeaf={renderLeaf}
         renderElement={renderElement}

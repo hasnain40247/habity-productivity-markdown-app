@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Styles/markdown.css";
 import { Context as MarkContext } from "../Context/MarkDownContext";
 import ReactMarkdown from "react-markdown";
+import escapeHtml from 'escape-html'
+import { Text } from 'slate'
 import {
   FiBold,
   FiMoreVertical,
@@ -15,15 +17,21 @@ import {
 } from "react-icons/fi";
 import { PreviewButton } from "./Slate";
 import { Node } from "slate";
+import rehypeRaw from "rehype-raw";
 
 const Display = ({ index, toggle, buttonstate }) => {
   const { setMarkDown, setTitle } = useContext(MarkContext);
   const { state: pageState } = useContext(MarkContext);
+  const [mark,setMark]=useState("")
+  let curr=[]
   console.log(pageState[index].markdown)
+
   const serialize = nodes => {
     return nodes.map(n => Node.string(n)).join('\n')
   }
- console.log(serialize(pageState[index].markdown))
+
+
+ serialize(pageState[index].markdown)
 const htm="<h1>HOHOHOOHHO</h1>"
  
   return (
@@ -40,6 +48,7 @@ const htm="<h1>HOHOHOOHHO</h1>"
         <div className="header">
           <input
             className="titleArea"
+            disabled
             type={"text"}
             value={pageState[index].title}
             onChange={(change) => {
@@ -88,7 +97,10 @@ const htm="<h1>HOHOHOOHHO</h1>"
    
      
       </div>
-      <ReactMarkdown className="richEditor">{htm}</ReactMarkdown>
+      <ReactMarkdown className="richEditor" >{
+ serialize(pageState[index].markdown)
+
+      }</ReactMarkdown>
     </div>
   );
 };
