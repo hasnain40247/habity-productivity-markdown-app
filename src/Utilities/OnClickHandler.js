@@ -1,4 +1,4 @@
-import { CustomEditor } from "./RenderElements";
+import { CustomEditor } from "../../Utilities/Helpers/CustomEditor";
 
 export function OnClickHandler(event,icon,editor){
     console.log("SELECTION")

@@ -1,0 +1,60 @@
+.toolBar {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 2px 10px 0px;
+  
+    width: 100%;
+    background-color: #272822;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fefcf8;
+    
+   padding: 8px;
+   box-sizing: border-box;
+  }
+
+  
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  
+    width: 100%;
+    color: #928869;
+  
+    background-color: #272822;
+  
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+  
+    text-align: center;
+  }
+
+
+  .titleArea {
+    border: none;
+    font-weight: 600;
+    font-size: 1.5rem;
+    outline: none;
+    box-sizing: border-box;
+    background-color: transparent;
+    color: #928869;
+  }
+  .styles {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .previewbuttonarea{
+    
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        background-color: #fffbf1
+      
+  }

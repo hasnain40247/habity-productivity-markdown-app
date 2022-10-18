@@ -2,103 +2,6 @@ import React from "react";
 import { Editor, Element, Range, Text, Transforms, Document } from "slate";
 import { css } from "@emotion/css";
 
-export const CodeElement = (props) => {
-  return (
-    <pre {...props.attributes}>
-      <code>{props.children}</code>
-    </pre>
-  );
-};
-
-export const ListElement = (props) => {
-  return (
-    <ul {...props.attributes}>
-      <li>{props.children}</li>
-    </ul>
-  );
-};
-
-export const BoldElement = (props) => {
-  return <h2 {...props.attributes}>{props.children}</h2>;
-};
-
-export const UnderLineElement = (props) => {
-  return <u {...props.attributes}>{props.children}</u>;
-};
-export const DefaultElement = (props) => {
-  return <p {...props.attributes}>{props.children}</p>;
-};
-
-export const Leaf = (props) => {
-  // return (
-  //   <span
-  //     {...props.attributes}
-  //     style={{
-  //       fontWeight: props.leaf.bold ? "bold" : "normal",
-  //       textDecoration: props.leaf.underline ? "underline" : "none",
-  //       fontStyle: props.leaf.italic ? "italic" : "normal",
-  //     }}
-  //   >
-  //     {props.children}
-  //   </span>
-  // );
-  const { attributes, children, leaf, editor } = props;
-  console.log(editor);
-  console.log("NEXT LETTER");
-  console.log(leaf.text[leaf.text.length - 1]);
-  if (editor.selection && Range.isCollapsed(editor.selection)) {
-    Editor.removeMark(editor, "bold");
-    Editor.removeMark(editor, "italic");
-
-  }
-
-  return (
-    <span
-      {...attributes}
-      className={css`
-        font-weight: ${leaf.bold && 'bold'};
-        font-style: ${leaf.italic && 'italic'};
-        text-decoration: ${leaf.underlined && 'underline'};
-        ${leaf.title &&
-          css`
-            display: inline-block;
-            font-weight: bold;
-            font-size: 20px;
-            margin: 20px 0 10px 0;
-          `}
-        ${leaf.list &&
-          css`
-            padding-left: 10px;
-            font-size: 20px;
-            line-height: 10px;
-          `}
-        ${leaf.hr &&
-          css`
-            display: block;
-            text-align: center;
-            border-bottom: 2px solid #ddd;
-          `}
-        ${leaf.blockquote &&
-          css`
-            display: inline-block;
-            border-left: 2px solid #ddd;
-            padding-left: 10px;
-            color: #aaa;
-            font-style: italic;
-          `}
-        ${leaf.code &&
-          css`
-            font-family: monospace;
-            background-color: #eee;
-            padding: 3px;
-          `}
-      `}
-    >
-      {children}
-    </span>
-  );
-};
-
 export const CustomEditor = {
   isMarkActive(editor, mark) {
     const [match] = Editor.nodes(editor, {
@@ -237,7 +140,7 @@ export const CustomEditor = {
 
   markPrefix: {
     bold: "**",
-    italic:"_"
+    italic: "_",
   },
   toggleMark(editor, format) {
     const isActive = CustomEditor.isMarkActive(editor, format);
@@ -246,12 +149,12 @@ export const CustomEditor = {
       Transforms.delete(editor, {
         at: Editor.end(editor, editor.selection),
         unit: "character",
-        distance:  format==="bold"? 2:1,
+        distance: format === "bold" ? 2 : 1,
       });
       Transforms.delete(editor, {
         at: Editor.start(editor, editor.selection),
         unit: "character",
-        distance: format==="bold"? 2:1,
+        distance: format === "bold" ? 2 : 1,
         reverse: true,
       });
       Editor.removeMark(editor, format);

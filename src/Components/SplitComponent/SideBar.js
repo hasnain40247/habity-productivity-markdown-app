@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import "./Styles/SideBar.css"
+import React, { useState } from "react";
+import "../../Styles/sidebarStyles.css";
 const SideBar = () => {
 
     return (

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./Styles/markdown.css";
 import { Context as MarkContext } from "../Context/MarkDownContext";
 import ReactMarkdown from "react-markdown";
 import escapeHtml from 'escape-html'
@@ -15,11 +14,11 @@ import {
   FiEdit2,
   FiBookOpen,
 } from "react-icons/fi";
-import { PreviewButton } from "./Slate";
 import { Node } from "slate";
 import rehypeRaw from "rehype-raw";
+import PreviewButton from "../Components/PreviewButton";
 
-const Display = ({ index, toggle, buttonstate }) => {
+const Preview = ({ index, toggle, buttonstate }) => {
   const { setMarkDown, setTitle } = useContext(MarkContext);
   const { state: pageState } = useContext(MarkContext);
   const [mark,setMark]=useState("")
@@ -104,4 +103,4 @@ const htm="<h1>HOHOHOOHHO</h1>"
     </div>
   );
 };
-export default Display;
+export default Preview;
