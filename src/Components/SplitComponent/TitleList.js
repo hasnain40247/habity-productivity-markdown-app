@@ -1,7 +1,8 @@
 import React from "react";
 import "../../Styles/titlelistStyles.css";
-import TitleHeader from "../TitleHeader";
-import TitleScrollSection from "../TitleScrollSection";
+import TitleHeader from "../TitleListComponents/TitleHeader";
+import TitleScrollSection from "../TitleListComponents/TitleScrollSection";
+
 
 const TitleList = ({ handleID }) => {
   return (

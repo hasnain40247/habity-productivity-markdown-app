@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../Styles/titlelistStyles.css"
+import "../../Styles/titlelistStyles.css"
 
 const ListTile = ({ id, name, handleID }) => {
     const [click, setClick] = useState(false);

@@ -24,6 +24,7 @@
     "react-scripts": "5.0.1",
     "react-split": "^2.0.14",
     "rehype-raw": "^6.1.1",
+    "resizable-panels-react": "^2.0.8",
     "slate": "^0.82.1",
     "slate-react": "^0.83.0",
     "styled-components": "^5.3.6",

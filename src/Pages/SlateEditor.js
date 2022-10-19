@@ -8,9 +8,11 @@ import Prism from "prismjs";
 import "prismjs/components/prism-bash";
 import "prismjs/components/prism-markdown";
 
-import ToolBar from "../Components/ToolBar";
+import ToolBar from "../Components/MarkDownComponent/ToolBar";
+import Preview from "./Preview";
+import EmptySection from "../Components/MarkDownComponent/EmptySection";
 
-const SlateEditor = ({ toggle, index, buttonstate }) => {
+const SlateEditor = ({ index }) => {
   const {
     state: pageState,
     setMarkDown,
@@ -68,16 +70,68 @@ const SlateEditor = ({ toggle, index, buttonstate }) => {
 
   const [state, setState] = useState({ value: "" });
   const [click, setClick] = useState(false);
+  const [editor] = useState(() => withReact(createEditor()));
+
+  const [toggle, setToggle] = useState(0);
+  const handleToggle = () => setToggle(toggle === 0 ? 1 : 0);
 
   return (
-    <Slate
-      editor={pageState[index].editor}
-      key={pageState[index].id}
-      value={pageState[index].markdown}
-      onChange={(changes) => setMarkDown(changes, pageState[index].id)}
+    <div
+      style={{
+        flexDirection: "column",
+        display: "flex",
+      }}
     >
-      <ToolBar index={index} pageState={pageState} />
-    </Slate>
+      {pageState.length > 0 ? (
+        <Slate editor={editor} value={[]}>
+          <ToolBar
+            index={index}
+            pageState={pageState}
+            editor={editor}
+            toggle={toggle}
+            handleToggle={handleToggle}
+          />
+          {toggle === 0 ? (
+            <Editable className="richEditor markfont" />
+          ) : (
+            <Preview index={index} />
+          )}
+        </Slate>
+      ) : (
+        <EmptySection />
+      )}
+    </div>
+    // <Slate
+    //   editor={pageState[index].editor}
+    //   key={pageState[index].id}
+    //   value={pageState[index].markdown}
+    //   onChange={(changes) => setMarkDown(changes, pageState[index].id)}
+    // >
+    //   <ToolBar index={index} pageState={pageState} />
+    //   {/* <Editable
+    //     className="richEditor markfont"
+    //     decorate={decorate}
+
+    //     // onKeyDown={(event) => {
+    //     //   console.log(event);
+    //     //   if (!event.ctrlKey) {
+    //     //     return;
+    //     //   }
+    //     //   switch (event.key) {
+    //     //     case "`": {
+    //     //       event.preventDefault();
+    //     //       CustomEditor.toggleCodeBlock(pageState[index].editor);
+    //     //       break;
+    //     //     }
+    //     //     case "b": {
+    //     //       event.preventDefault();
+    //     //       CustomEditor.toggleBoldMark(pageState[index].editor);
+    //     //       break;
+    //     //     }
+    //     //   }
+    //     // }}
+    //   /> */}
+    // </Slate>
   );
 };
 export default SlateEditor;

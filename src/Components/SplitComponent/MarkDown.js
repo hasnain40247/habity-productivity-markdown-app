@@ -1,8 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import "../../Styles/markdownStyles.css";
+import "../../Styles/markdownStyles.css"
 import { Context as MarkContext } from "../../Context/MarkDownContext";
+import { BiDotsVerticalRounded } from "react-icons/bi";
+import MDEditor from "@uiw/react-md-editor";
 import EmptySection from "../MarkDownComponent/EmptySection";
-import EditorSection from "../MarkDownComponent/EditorSection";
+
+import ToolBar from "../MarkDownComponent/ToolBar";
+import { createEditor } from "slate";
+import { withReact } from "slate-react";
+import SlateEditor from "../../Pages/SlateEditor";
 
 const MarkDown = ({ id }) => {
   const [markdown, setMark] = useState("");
@@ -10,14 +16,16 @@ const MarkDown = ({ id }) => {
   const { state } = useContext(MarkContext);
   let index = state.findIndex((e) => e.id === id);
 
+  // if (id === 0) {
+  //   return <EmptySection />;
+  // } else {
+  //   return (
+    
+  //       <EditorSection index={index} />
+      
+  //   );
+  // }
 
-  console.log(state);
-
-  if (id === 0) {
-    return <EmptySection />;
-  } else {
-
-    return <EditorSection index={index} />;
-  }
+  return <SlateEditor index={index} />
 };
 export default MarkDown;

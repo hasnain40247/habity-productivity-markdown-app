@@ -6,11 +6,14 @@ import MarkDownSection from "../Components/SplitComponent/MarkDown";
 import MarkDown from "../Components/SplitComponent/MarkDown";
 const Home = () => {
   const [id, setID] = useState(0);
+  const handleID = (value) => {
+    setID(value);
+  };
 
   return (
     <Split
       direction="horizontal"
-      sizes={[20, 30, 50]}
+      sizes={[20, 25, 55]}
       cursor="col-resize"
       expandToMin={false}
       gutter={(index, direction) => {
@@ -18,9 +21,9 @@ const Home = () => {
         gutter.className = `gutter gutter-${direction}`;
         return gutter;
       }}
-      minSize={[200, 300, 700]}
-      gutterSize={1}
-      snapOffset={2}
+      snapOffset={1}
+      minSize={[200, 300, 500]}
+      gutterSize={2}
       gutterAlign="center"
       dragInterval={1}
       style={{
@@ -31,11 +34,7 @@ const Home = () => {
       }}
     >
       <SideBar />
-      <TitleList
-        handleID={(value) => {
-          setID(value);
-        }}
-      />
+      <TitleList handleID={handleID} />
       <MarkDown id={id} />
     </Split>
   );
