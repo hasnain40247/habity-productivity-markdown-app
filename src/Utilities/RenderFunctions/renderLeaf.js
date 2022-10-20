@@ -1,7 +1,11 @@
-import React from "react";
-import { LeafElement } from "../Elements/LeafElement";
-const renderLeaf = useCallback((props) => {
-    return <LeafElement {...props} 
-    // editor={pageState[index].editor}
-     />;
-  }, []);
+import React, { useCallback } from "react";
+import Leaf from "../../Utilities/Elements/LeafElement";
+const renderLeaf = (props) => {
+  return (
+    <Leaf
+      {...props}
+      // editor={pageState[index].editor}
+    />
+  );
+};
+export default renderLeaf;

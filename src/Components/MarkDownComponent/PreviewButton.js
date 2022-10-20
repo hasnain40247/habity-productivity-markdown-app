@@ -1,5 +1,6 @@
 import React from "react";
 import { FiEdit2, FiEye } from "react-icons/fi";
+import {AiFillEdit, AiFillEye} from "react-icons/ai"
 
 
 const PreviewButton = ({ buttonstate, toggle }) => {
@@ -20,11 +21,13 @@ const PreviewButton = ({ buttonstate, toggle }) => {
             }}
             // onMouseDown={onMouseDown}
           >
-            <FiEdit2
-              style={{
-                color: "#FF9494",
-              }}
-            />
+     
+            <AiFillEdit style={{
+                color: "#66BFBF",
+  fontSize: "1.5rem"
+
+
+            }}/>
           </div>
         );
   
@@ -46,9 +49,11 @@ const PreviewButton = ({ buttonstate, toggle }) => {
             }}
             // onMouseDown={onMouseDown}
           >
-            <FiEye
+            <AiFillEye
               style={{
                 color: "#B1B2FF",
+  fontSize: "1.5rem"
+
               }}
             />
           </div>

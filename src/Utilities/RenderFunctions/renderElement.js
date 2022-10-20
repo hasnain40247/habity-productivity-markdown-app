@@ -1,59 +1,46 @@
 import React, { useCallback } from "react";
 
-export const renderElement = useCallback((props) => {
-  switch (props.element.type) {
-    case "code":
-      return <CodeElement {...props} />;
+export const renderElement = (props) => <Element {...props} />;
+
+const Element = ({ attributes, children, element }) => {
+  console.log(element);
+  switch (element.type) {
+    case "block-quote":
+      return <blockquote {...attributes}>{children}</blockquote>;
     case "list":
-      return <ListElement {...props} />;
-    case "h1":
+      return <ul {...attributes}>{children}</ul>;
+    case "heading-one":
       return (
-        <strong className="spanss" {...props.attributes}>
-          **{props.children}**
-        </strong>
+        <h1 {...attributes}>
+          <span>#</span> {children}
+        </h1>
       );
-
-    case "boldmark":
+    case "heading-two":
       return (
-        <span
-          style={{ fontWeight: "bold" }}
-          {...props.attributes}
-          className={"link"}
-        >
-          <span>**</span>
-          <span>{props.children}</span>
-
-          <span>**</span>
-        </span>
+        <h2 {...attributes}>
+          <span>##</span> {children}
+        </h2>
       );
-
-    case "italicmark":
+    case "heading-three":
+      return <h3 {...attributes}>{children}</h3>;
+    case "heading-four":
+      return <h4 {...attributes}>{children}</h4>;
+    case "heading-five":
+      return <h5 {...attributes}>{children}</h5>;
+    case "heading-six":
+      return <h6 {...attributes}>{children}</h6>;
+    case "list-item":
+      return <li {...attributes}>{children}</li>;
+    case "code":
       return (
-        <span
-          style={{ fontStyle: "italic" }}
-          {...props.attributes}
-          className={"link"}
-        >
-          <span>*</span>
-          <span>{props.children}</span>
-
-          <span>*</span>
-        </span>
-      );
-
-    case "listmark":
-      return (
-        <span
-          style={{ paddingLeft: "10px", display: "block" }}
-          {...props.attributes}
-          className={"link"}
-        >
-          <span>- </span>
-          <span>{props.children}</span>
-        </span>
+        <pre {...attributes}>
+          <span>`</span>
+          <code>{children}</code>
+          <span>`</span>
+        </pre>
       );
 
     default:
-      return <DefaultElement {...props} />;
+      return <p {...attributes}>{children}</p>;
   }
-}, []);
+};

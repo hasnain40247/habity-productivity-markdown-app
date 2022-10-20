@@ -18,7 +18,7 @@ import { Node } from "slate";
 import rehypeRaw from "rehype-raw";
 import PreviewButton from "../Components/MarkDownComponent/PreviewButton";
 
-const Preview = ({ index}) => {
+const Preview = ({ value, index }) => {
   const { setMarkDown, setTitle } = useContext(MarkContext);
   const { state: pageState } = useContext(MarkContext);
   const [mark, setMark] = useState("");
@@ -26,17 +26,19 @@ const Preview = ({ index}) => {
   // console.log(pageState[index].markdown);
 
   const serialize = (nodes) => {
-    return nodes.map((n) => Node.string(n)).join("\n");
+    return nodes
+      .map(function (n) {
+        console.log(n);
+        return Node.string(n);
+      })
+      .join("\n\n");
   };
 
   // serialize(pageState[index].markdown);
   const htm = "<h1>HOHOHOOHHO</h1>";
 
   return (
-    <ReactMarkdown className="richEditor">
-      {htm}
-      {/* {serialize(pageState[index].markdown)} */}
-    </ReactMarkdown>
+    <ReactMarkdown className="richEditor">{serialize(value)}</ReactMarkdown>
   );
 };
 export default Preview;

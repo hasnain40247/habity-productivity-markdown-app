@@ -1,10 +1,9 @@
 import React from "react";
+import { AiFillDelete } from "react-icons/ai";
+import { BsFillTrash2Fill } from "react-icons/bs";
 import { FiMoreVertical } from "react-icons/fi";
 import PreviewButton from "./PreviewButton";
-const MarkDownHeader = ({handleToggle, toggle}) => {
-
-
-
+const MarkDownHeader = ({ handleToggle, toggle }) => {
   return (
     <div
       style={{
@@ -13,7 +12,7 @@ const MarkDownHeader = ({handleToggle, toggle}) => {
         width: "100%",
         justifyContent: "space-between",
         alignItems: "center",
-        margin:"10px 0px"
+        margin: "10px 0px",
       }}
     >
       <input
@@ -45,9 +44,10 @@ const MarkDownHeader = ({handleToggle, toggle}) => {
             // setClick(!click);
           }}
         >
-          <FiMoreVertical
+          <BsFillTrash2Fill
             style={{
-              color: "#928869",
+              color: "#FF8080",
+              fontSize: "1.5rem",
             }}
           />
         </div>

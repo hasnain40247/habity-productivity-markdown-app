@@ -11,66 +11,17 @@ import "prismjs/components/prism-markdown";
 import ToolBar from "../Components/MarkDownComponent/ToolBar";
 import Preview from "./Preview";
 import EmptySection from "../Components/MarkDownComponent/EmptySection";
+import { renderElement } from "../Utilities/RenderFunctions/renderElement";
+import { onKeyDown } from "../Utilities/Helpers/OnKeyDown";
+import { initialValue } from "../Utilities/Helpers/InitialState";
+import { renderDecorator } from "../Utilities/RenderFunctions/renderDecorator";
+import renderLeaf from "../Utilities/RenderFunctions/renderLeaf";
 
 const SlateEditor = ({ index }) => {
-  const {
-    state: pageState,
-    setMarkDown,
-    setTitle,
-    deletePage,
-  } = useContext(Context);
+  const { state: pageState } = useContext(Context);
 
-  const decorate = useCallback(([node, path]) => {
-    console.log("Node: ");
-    console.log(node);
-
-    console.log("Path: ");
-    console.log(path);
-
-    const ranges = [];
-
-    if (!Text.isText(node)) {
-      return ranges;
-    }
-
-    const getLength = (token) => {
-      if (typeof token === "string") {
-        return token.length;
-      } else if (typeof token.content === "string") {
-        return token.content.length;
-      } else {
-        return token.content.reduce((l, t) => l + getLength(t), 0);
-      }
-    };
-
-    const tokens = Prism.tokenize(node.text, Prism.languages.markdown);
-    console.log("TOKENS");
-    console.log(tokens);
-    let start = 0;
-
-    for (const token of tokens) {
-      const length = getLength(token);
-      const end = start + length;
-
-      if (typeof token !== "string") {
-        console.log(token.type);
-
-        ranges.push({
-          [token.type]: true,
-          anchor: { path, offset: start },
-          focus: { path, offset: end },
-        });
-      }
-
-      start = end;
-    }
-    console.log(ranges);
-    return ranges;
-  }, []);
-
-  const [state, setState] = useState({ value: "" });
-  const [click, setClick] = useState(false);
   const [editor] = useState(() => withReact(createEditor()));
+  const [value,setValue]= useState(initialValue)
 
   const [toggle, setToggle] = useState(0);
   const handleToggle = () => setToggle(toggle === 0 ? 1 : 0);
@@ -83,7 +34,7 @@ const SlateEditor = ({ index }) => {
       }}
     >
       {pageState.length > 0 ? (
-        <Slate editor={editor} value={[]}>
+        <Slate editor={editor} value={value} onChange={(change)=>setValue(change)}>
           <ToolBar
             index={index}
             pageState={pageState}
@@ -92,9 +43,18 @@ const SlateEditor = ({ index }) => {
             handleToggle={handleToggle}
           />
           {toggle === 0 ? (
-            <Editable className="richEditor markfont" />
+            <Editable
+              // onDOMBeforeInput={handleDOMBeforeInput}
+              decorate={renderDecorator}
+              renderLeaf={renderLeaf}
+              // renderElement={renderElement}
+              placeholder="Write some markdown..."
+              // onKeyDown={(event)=>onKeyDown(event,editor)}
+              
+              className="richEditor markfont"
+            />
           ) : (
-            <Preview index={index} />
+            <Preview index={index} value={value}  />
           )}
         </Slate>
       ) : (
