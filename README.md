@@ -1,5 +1,10 @@
 # Habit-y, A Slate.JS based markdown journaling and habit-tracking Electron App
 
+A completely custom text-editor with dynamic text decoration and element renders coded from the bottom-up.
+
+![alt text](public/mark.png)
+
+
 
 
 # Getting Started with Create React App
