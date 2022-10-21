@@ -16,6 +16,7 @@ import { onKeyDown } from "../Utilities/Helpers/OnKeyDown";
 import { initialValue } from "../Utilities/Helpers/InitialState";
 import { renderDecorator } from "../Utilities/RenderFunctions/renderDecorator";
 import renderLeaf from "../Utilities/RenderFunctions/renderLeaf";
+import { addBlockStyleList, handleEnter } from "../Utilities/Helpers/OnClickHandler";
 
 const SlateEditor = ({ index }) => {
   const { state: pageState } = useContext(Context);
@@ -45,11 +46,17 @@ const SlateEditor = ({ index }) => {
           {toggle === 0 ? (
             <Editable
               // onDOMBeforeInput={handleDOMBeforeInput}
-              decorate={renderDecorator}
+              decorate={([node,path])=>renderDecorator([node,path,editor])}
               renderLeaf={renderLeaf}
-              // renderElement={renderElement}
+              renderElement={renderElement}
               placeholder="Write some markdown..."
-              // onKeyDown={(event)=>onKeyDown(event,editor)}
+              onKeyDown={(event)=>{
+                if(event.code==="Enter"){
+                  event.preventDefault()
+                  handleEnter("list-item",editor)
+                  
+                }
+              }}
               
               className="richEditor markfont"
             />

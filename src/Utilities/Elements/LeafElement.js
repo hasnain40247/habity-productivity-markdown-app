@@ -1,9 +1,17 @@
 import React, { useState } from "react";
-import { Editor, Element, Range, Text, Transforms, Document } from "slate";
+import {
+  Editor,
+  Element,
+  Range,
+  Text,
+  Transforms,
+  Document,
+  Node,
+} from "slate";
 import { css } from "@emotion/css";
 
-export const Leaf = ({ attributes, children, leaf }) => {
-  
+export const Leaf = (props) => {
+  let { leaf, children, attributes } = props;
 
   return (
     <span
@@ -36,7 +44,7 @@ export const Leaf = ({ attributes, children, leaf }) => {
         ${leaf.list &&
         css`
           padding-left: 10px;
-          font-size: 20px;
+          color: #54BAB9;
           line-height: 10px;
         `}
         ${leaf.hr &&
@@ -58,10 +66,10 @@ export const Leaf = ({ attributes, children, leaf }) => {
           display: table;
           border-radius: 5px;
           margin: 10px 0 5px 0;
-color: #FBF2CF;
+          color: #fbf2cf;
           font-family: monospace;
           background-color: #393e46;
-          padding: 3px;
+          padding: 5px;
         `}
       `}
     >

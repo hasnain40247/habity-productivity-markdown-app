@@ -13,7 +13,7 @@ export const isMarkActive = (editor, mark) => {
     },
     universal: true,
   });
-  console.log(match);
+  // console.log(match);
   return !!match;
 };
 export const CustomChecks = {

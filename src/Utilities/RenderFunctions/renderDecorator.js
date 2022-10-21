@@ -1,9 +1,10 @@
-import { Text, Transforms } from "slate";
+import { Node, Text, Transforms } from "slate";
 import Prism from "prismjs";
 import { getHeadingLevel, getLength } from "../Helpers/DecoratorFunctions";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
-export const renderDecorator = ([node, path]) => {
+export const renderDecorator = (props) => {
+  let [node, path, editor] = props;
 
 
   const ranges = [];
@@ -20,12 +21,11 @@ export const renderDecorator = ([node, path]) => {
   for (const token of tokens) {
     const length = getLength(token);
     const end = start + length;
+ 
     if (typeof token !== "string") {
-      console.log(token.type);
-   
       ranges.push({
         [token.type]: true,
-       
+
         heading: token.type === "title" ? getHeadingLevel(token) : null,
         anchor: { path, offset: start },
         focus: { path, offset: end },

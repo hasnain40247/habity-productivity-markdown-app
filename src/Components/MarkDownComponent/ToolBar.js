@@ -8,7 +8,7 @@ const ToolBar = ({ handleToggle, toggle, pageState, index, editor }) => {
     <div className="toolbar">
       <MarkDownHeader toggle={toggle} handleToggle={handleToggle} />
 
-      <StyleButtons editor={editor} />
+     {toggle===0? <StyleButtons editor={editor} />:null}
     </div>
   );
 };

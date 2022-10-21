@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { ImUnderline } from "react-icons/im";
-import { BsTypeBold } from "react-icons/bs";
+import { BsListOl, BsTypeBold } from "react-icons/bs";
 import { BiCode, BiDotsVerticalRounded } from "react-icons/bi";
 import { VscBold, VscItalic } from "react-icons/vsc";
 import { Context as MarkContext } from "../../Context/MarkDownContext";
@@ -42,7 +42,16 @@ const ToolBarButton = (props) => {
         }}
       />
     ),
-    list: <FiList />,
+    list: <FiList
+    style={{
+      fontSize: "1rem",
+    }}
+    />,
+    olist: <BsListOl
+    style={{
+      fontSize: "1rem",
+    }}
+    />
   };
   return (
     <div

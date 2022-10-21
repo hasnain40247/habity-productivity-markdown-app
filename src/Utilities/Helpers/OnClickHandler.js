@@ -1,4 +1,4 @@
-import { Editor, Range, Transforms } from "slate";
+import { Editor, Path, Range, Transforms } from "slate";
 
 export const OnClickHandler = (event, icon, editor) => {
   console.log(icon);
@@ -19,6 +19,14 @@ export const OnClickHandler = (event, icon, editor) => {
       return addBlockStyle(icon, editor);
       break;
     }
+    case "list": {
+      return addBlockStyle(icon, editor);
+      break;
+    }
+    case "olist": {
+      return addBlockStyle(icon, editor);
+      break;
+    }
   }
 };
 export const stylemap = {
@@ -26,9 +34,37 @@ export const stylemap = {
   italic: "_",
   strike: "~",
   "code-snippet": "`",
+  list: "- ",
+  olist: "1. ",
 };
 
+export const handleEnter = (style, editor, event) => {
+  let listpointer = editor.children.at(-1).children[0].text[0];
+  console.log(typeof listpointer);
+  Editor.insertSoftBreak(editor);
+
+  if (typeof listpointer != "undefined") {
+    if (listpointer === "-") {
+      Editor.insertText(editor, "-");
+    } else if (!isNaN(listpointer)) {
+      let prev = editor.children.at(-2).children[0].text.split(".")[0];
+      Editor.insertText(editor, String(Number(prev) + 1) + ".");
+    }
+  }
+
+  // console.log(editor.children[editor.children.length - 1].children[0])
+  //   if (editor.children[editor.children.length - 1].children[0].text[0] === "-") {
+  // Editor.insertBreak(editor)
+
+  //   } else{
+  // Editor.insertBreak(editor)
+
+  //   }
+};
 export const addBlockStyle = (style, editor) => {
+  console.log(style);
+  let check = style;
+  if (style === "olist" || style === "list") check = "list";
   let location = editor.selection;
   const isSelectionCollapsed = Range.isCollapsed(editor.selection);
 
@@ -37,36 +73,29 @@ export const addBlockStyle = (style, editor) => {
     console.log(editor);
     let teststart = start;
     let testend = end;
-    Transforms.insertText(editor, stylemap[style], { at: testend });
+    if (check != "list") {
+      Transforms.insertText(editor, stylemap[style], { at: testend });
+    }
     Transforms.insertText(editor, stylemap[style], { at: teststart });
-    console.log(location);
-    // Transforms.select(editor,)
-    console.log(start);
-    console.log(end);
-
-    // Transforms.move(editor, {
-    //   distance: 1,
-    //   unit: "character",
-    //   edge: "focus",
-
-    // });
     const [newstart, newend] = Range.edges(editor.selection);
     Transforms.splitNodes(editor, { at: newend });
 
     Transforms.splitNodes(editor, { at: start });
-
-    Transforms.move(editor, {
-      distance: 2,
-      unit: "character",
-      edge: "focus",
-      reverse: true,
-    });
+    if (check != "list")
+      Transforms.move(editor, {
+        distance: 1,
+        unit: "character",
+        edge: "focus",
+        reverse: true,
+      });
   } else {
-    // Transforms.splitNodes(editor, {height:20})
     let string = stylemap[style] + style + stylemap[style];
-    console.log(string);
     const [start, end] = Range.edges(editor.selection);
-    Transforms.insertText(editor, stylemap[style] + style + stylemap[style]);
+    if (check === "list")
+      Transforms.insertText(editor, stylemap[style] + style);
+    else
+      Transforms.insertText(editor, stylemap[style] + style + stylemap[style]);
+
     const [newstart, newend] = Range.edges(editor.selection);
 
     Transforms.splitNodes(editor, { at: newend });
