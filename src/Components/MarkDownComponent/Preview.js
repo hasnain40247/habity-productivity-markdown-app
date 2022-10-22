@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Context as MarkContext } from "../Context/MarkDownContext";
+import { Context as MarkContext } from "../../Context/MarkDownContext";
 import ReactMarkdown from "react-markdown";
 import escapeHtml from "escape-html";
 import { Text } from "slate";
@@ -16,7 +16,7 @@ import {
 } from "react-icons/fi";
 import { Node } from "slate";
 import rehypeRaw from "rehype-raw";
-import PreviewButton from "../Components/MarkDownComponent/PreviewButton";
+import PreviewButton from "./PreviewButton";
 
 const Preview = ({ value, index }) => {
   const { setMarkDown, setTitle } = useContext(MarkContext);

@@ -1,19 +1,24 @@
+import { useSelector } from "react-redux";
 import ListTile from "./ListTile";
-import { Context as MarkContext } from "../../Context/MarkDownContext";
-import { useContext } from "react";
+import {TbMinusVertical} from"react-icons/tb"
 
-
-const TitleScrollSection=({handleID})=>{
-  const { state } = useContext(MarkContext);
-
-return (
+const TitleScrollSection = ({ handleID, pages, selectedPage }) => {
+  return (
     <div className="titleScroll">
-    {state.map((e) => {
-      return (
-        <ListTile id={e.id} name={e.title} handleID={handleID} key={e.id} />
-      );
-    })}
-  </div>
-)
-}
-export default TitleScrollSection
+      {pages.map((e) => {
+        return (
+      
+          <ListTile
+            id={e.pageId}
+            name={e.pageName}
+            selectedPage={selectedPage}
+            handleID={handleID}
+            key={e.pageId}
+          />
+          
+        );
+      })}
+    </div>
+  );
+};
+export default TitleScrollSection;

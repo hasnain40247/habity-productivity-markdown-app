@@ -1,15 +1,13 @@
-
 .titlelistbackground {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: #eeeeee;
-
+  height: 100vh;
 }
 .titleScroll {
   box-sizing: border-box;
   height: 100vh;
-  padding: 8px;
+  padding: 2px;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
@@ -27,20 +25,26 @@
   width: 100%;
   top: 0;
   background-color: #eeeeee;
-  box-shadow: rgb(34, 40, 49,0.2) 0px 7px 10px 0px;
+  box-shadow: rgb(34, 40, 49, 0.2) 0px 7px 10px 0px;
   font-family: "Montserrat", sans-serif;
   font-weight: normal;
-  color: #393E46;
+  color: #393e46;
 
   text-align: center;
 }
 
-
-.icons{
+.icons {
   font-size: 23px;
 }
 .title {
   width: 100%;
+  color: #393e46;
+
+  color: #393e46;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
   font-family: "Montserrat", sans-serif;
   font-weight: normal;
@@ -50,7 +54,17 @@
   border-bottom: 0.5px solid rgb(67, 67, 67, 0.2);
 }
 
+.journalTitle{
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  font-weight: bolder;
+  font-family: "Montserrat";
+  outline: none;
+  box-sizing: border-box;
+  background-color: transparent;
+  color: #393e46
+}
 /* width */
-
 
 /* Handle on hover */

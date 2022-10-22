@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useState } from "react";
 
-import { Context } from "../Context/MarkDownContext";
+import { Context } from "../../Context/MarkDownContext";
 import { createEditor, Editor, Text, Transforms } from "slate";
 import { Slate, Editable, withReact, DefaultElement } from "slate-react";
 
@@ -8,18 +8,18 @@ import Prism from "prismjs";
 import "prismjs/components/prism-bash";
 import "prismjs/components/prism-markdown";
 
-import ToolBar from "../Components/MarkDownComponent/ToolBar";
+import ToolBar from "./ToolBar";
 import Preview from "./Preview";
-import EmptySection from "../Components/MarkDownComponent/EmptySection";
-import { renderElement } from "../Utilities/RenderFunctions/renderElement";
-import { onKeyDown } from "../Utilities/Helpers/OnKeyDown";
-import { initialValue } from "../Utilities/Helpers/InitialState";
-import { renderDecorator } from "../Utilities/RenderFunctions/renderDecorator";
-import renderLeaf from "../Utilities/RenderFunctions/renderLeaf";
-import { addBlockStyleList, handleEnter } from "../Utilities/Helpers/OnClickHandler";
+import EmptySection from "./EmptySection";
+import { renderElement } from "../../Utilities/RenderFunctions/renderElement";
+import { onKeyDown } from "../../Utilities/Helpers/OnKeyDown";
+import { initialValue } from "../../Utilities/Helpers/InitialState";
+import { renderDecorator } from "../../Utilities/RenderFunctions/renderDecorator";
+import renderLeaf from "../../Utilities/RenderFunctions/renderLeaf";
+import { addBlockStyleList, handleEnter } from "../../Utilities/Helpers/OnClickHandler";
 
 const SlateEditor = ({ index }) => {
-  const { state: pageState } = useContext(Context);
+  // const { state: pageState } = useContext(Context);
 
   const [editor] = useState(() => withReact(createEditor()));
   const [value,setValue]= useState(initialValue)
@@ -32,13 +32,12 @@ const SlateEditor = ({ index }) => {
       style={{
         flexDirection: "column",
         display: "flex",
+
       }}
     >
-      {pageState.length > 0 ? (
+      {1 > 0 ? (
         <Slate editor={editor} value={value} onChange={(change)=>setValue(change)}>
           <ToolBar
-            index={index}
-            pageState={pageState}
             editor={editor}
             toggle={toggle}
             handleToggle={handleToggle}

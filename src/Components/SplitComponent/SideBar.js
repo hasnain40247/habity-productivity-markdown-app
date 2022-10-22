@@ -1,14 +1,23 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import "../../Styles/sidebarStyles.css";
-const SideBar = () => {
+import Logo from "../SideBarComponents/Logo";
+import TitleTag from "../SideBarComponents/TitleTag";
+import TypeHeader from "../SideBarComponents/TypeHeader";
 
-    return (
-        <div className="sidebar">
-         <div className="headerSide">
-         <img src="/note.png" className="logo" height={70} width={70}/>
-         </div>
-        
-        </div>
-    )
-}
-export default SideBar
+const SideBar = () => {
+  const journals = useSelector((state) => state.journal.journals);
+  console.log(journals);
+  return (
+    <div className="sidebar">
+      <Logo />
+      <TypeHeader type={"Journals"} />
+      {journals.map((journal) => {
+        return <TitleTag key={journal.journalId}  currentId={journal.journalId} title={journal.journalName} />;
+      })}
+
+      <TypeHeader type={"Habits"} />
+    </div>
+  );
+};
+export default SideBar;

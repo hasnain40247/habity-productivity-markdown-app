@@ -3,7 +3,7 @@ import React from "react";
 import MarkDownHeader from "./MarkDownHeader";
 import StyleButtons from "./StyleButtons";
 
-const ToolBar = ({ handleToggle, toggle, pageState, index, editor }) => {
+const ToolBar = ({ handleToggle, toggle,editor }) => {
   return (
     <div className="toolbar">
       <MarkDownHeader toggle={toggle} handleToggle={handleToggle} />

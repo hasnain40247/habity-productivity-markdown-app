@@ -5,6 +5,7 @@
   "main": "public/main.js",
   "dependencies": {
     "@emotion/css": "^11.10.0",
+    "@reduxjs/toolkit": "^1.8.6",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -21,8 +22,10 @@
     "react-draft-wysiwyg": "^1.15.0",
     "react-icons": "^4.4.0",
     "react-markdown": "^8.0.3",
+    "react-redux": "^8.0.4",
     "react-scripts": "5.0.1",
     "react-split": "^2.0.14",
+    "redux": "^4.2.0",
     "rehype-raw": "^6.1.1",
     "resizable-panels-react": "^2.0.8",
     "slate": "^0.82.1",

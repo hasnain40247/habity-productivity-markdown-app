@@ -24,8 +24,10 @@
 
 .richEditor {
   font-family: "Montserrat", sans-serif;
-  padding: 0 15%;
-font-weight: 500;
+  width: 100%;
+
+  padding: 0 10%;
+  font-weight: 500;
   resize: none;
   font-size: 16px;
   line-height: 1;
@@ -54,8 +56,9 @@ font-weight: 500;
 
 .toolbar {
   background-color: #eeeeee;
-  padding: 5% 15%;
+  padding: 5% 10%;
   margin-top: 5%;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
@@ -100,8 +103,8 @@ font-weight: 500;
   width: 100%;
 }
 
-.stylebutton:hover{
-  cursor:pointer
+.stylebutton:hover {
+  cursor: pointer;
 }
 
 .previewbuttonarea {
@@ -110,8 +113,7 @@ font-weight: 500;
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-  
+
   background-color: transparent;
   height: 30px;
 }
-
