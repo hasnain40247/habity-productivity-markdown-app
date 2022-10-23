@@ -12,7 +12,6 @@ const TitleHeader = ({ name }) => {
 
   return (
     <div className="titleheader">
-      {/* <AiOutlineSortAscending className="icons" /> */}
       <h5>
         <input
       

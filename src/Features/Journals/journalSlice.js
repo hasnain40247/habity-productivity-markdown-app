@@ -40,18 +40,20 @@ export const counterSlice = createSlice({
         ],
         selectedPage: PageID,
       };
-
+      state.selectedJournal = JournalID;
       state.journals.push(newJournal);
     },
     addPage: (state, action) => {
+      let pageId = uuid();
       let newPage = {
-        pageId: uuid(),
+        pageId: pageId,
         pageName: "Untitled",
       };
 
       state.journals.map((e) => {
         if (e.journalId === state.selectedJournal) {
           e.pages.push(newPage);
+          e.selectedPage = pageId;
         }
       });
     },

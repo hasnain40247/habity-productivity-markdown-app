@@ -5,7 +5,7 @@ import {TbMinusVertical} from"react-icons/tb"
 const TitleScrollSection = ({ handleID, pages, selectedPage }) => {
   return (
     <div className="titleScroll">
-      {pages.map((e) => {
+      {pages.slice(0).reverse().map((e) => {
         return (
       
           <ListTile

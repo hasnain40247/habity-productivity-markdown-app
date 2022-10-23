@@ -16,13 +16,16 @@ import { onKeyDown } from "../../Utilities/Helpers/OnKeyDown";
 import { initialValue } from "../../Utilities/Helpers/InitialState";
 import { renderDecorator } from "../../Utilities/RenderFunctions/renderDecorator";
 import renderLeaf from "../../Utilities/RenderFunctions/renderLeaf";
-import { addBlockStyleList, handleEnter } from "../../Utilities/Helpers/OnClickHandler";
+import {
+  addBlockStyleList,
+  handleEnter,
+} from "../../Utilities/Helpers/OnClickHandler";
 
 const SlateEditor = ({ index }) => {
   // const { state: pageState } = useContext(Context);
 
   const [editor] = useState(() => withReact(createEditor()));
-  const [value,setValue]= useState(initialValue)
+  const [value, setValue] = useState(initialValue);
 
   const [toggle, setToggle] = useState(0);
   const handleToggle = () => setToggle(toggle === 0 ? 1 : 0);
@@ -32,11 +35,15 @@ const SlateEditor = ({ index }) => {
       style={{
         flexDirection: "column",
         display: "flex",
-
+        boxSizing: "border-box",
       }}
     >
       {1 > 0 ? (
-        <Slate editor={editor} value={value} onChange={(change)=>setValue(change)}>
+        <Slate
+          editor={editor}
+          value={value}
+          onChange={(change) => setValue(change)}
+        >
           <ToolBar
             editor={editor}
             toggle={toggle}
@@ -45,22 +52,20 @@ const SlateEditor = ({ index }) => {
           {toggle === 0 ? (
             <Editable
               // onDOMBeforeInput={handleDOMBeforeInput}
-              decorate={([node,path])=>renderDecorator([node,path,editor])}
+              decorate={([node, path]) => renderDecorator([node, path, editor])}
               renderLeaf={renderLeaf}
               renderElement={renderElement}
               placeholder="Write some markdown..."
-              onKeyDown={(event)=>{
-                if(event.code==="Enter"){
-                  event.preventDefault()
-                  handleEnter("list-item",editor)
-                  
+              onKeyDown={(event) => {
+                if (event.code === "Enter") {
+                  event.preventDefault();
+                  handleEnter("list-item", editor);
                 }
               }}
-              
               className="richEditor markfont"
             />
           ) : (
-            <Preview index={index} value={value}  />
+            <Preview index={index} value={value} />
           )}
         </Slate>
       ) : (

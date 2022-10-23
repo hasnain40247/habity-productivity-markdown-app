@@ -1,6 +1,8 @@
 .titlelistbackground {
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+
   background-color: #eeeeee;
   height: 100vh;
 }

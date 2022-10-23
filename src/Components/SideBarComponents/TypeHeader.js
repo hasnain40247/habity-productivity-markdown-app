@@ -1,11 +1,11 @@
 import React from "react";
 import { MdOutlineAdd } from "react-icons/md";
 import { GoPencil } from "react-icons/go";
-import {RiMentalHealthFill} from "react-icons/ri"
+import { RiMentalHealthFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { addJournal } from "../../Features/Journals/journalSlice";
-const  TypeHeader = ({type}) => {
-  const dispatch=useDispatch()
+const TypeHeader = ({ type }) => {
+  const dispatch = useDispatch();
   return (
     <div
       style={{
@@ -13,7 +13,8 @@ const  TypeHeader = ({type}) => {
         fontFamily: "Montserrat",
         display: "flex",
         flexDirection: "row",
-        fontWeight:"bolder",
+        fontWeight: "bolder",
+        padding: "0% 4%",
 
         alignItems: "center",
         justifyContent: "space-between",
@@ -27,27 +28,27 @@ const  TypeHeader = ({type}) => {
           alignItems: "center",
         }}
       >
-   { type==="Habits"?  <RiMentalHealthFill/>: <GoPencil />}
+        {type === "Habits" ? <RiMentalHealthFill /> : <GoPencil />}
         <p
           style={{
             color: "#EEEEEE",
             marginLeft: "10px",
-            fontWeight:"bolder",
+            fontWeight: "bolder",
           }}
         >
-{type}
+          {type}
         </p>
       </div>
       <MdOutlineAdd
-      onClick={()=>{
-dispatch(addJournal())
-      }}
+        onClick={() => {
+          dispatch(addJournal());
+        }}
         style={{
           fontSize: "1.3rem",
-          cursor:"pointer"
+          cursor: "pointer",
         }}
       />
     </div>
   );
 };
-export default TypeHeader
+export default TypeHeader;

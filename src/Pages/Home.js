@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <Split
       direction="horizontal"
-      sizes={[15, 25, 60]}
+      sizes={[15, 20, 65]}
       cursor="col-resize"
       expandToMin={false}
       gutter={(index, direction) => {
@@ -43,6 +43,8 @@ const Home = () => {
         backgroundColor: "#eeeeee",
         display: "flex",
         flexDirection: "row",
+  boxSizing:"border-box"
+
       }}
     >
       <SideBar />

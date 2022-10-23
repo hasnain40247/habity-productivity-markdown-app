@@ -19,11 +19,8 @@ import rehypeRaw from "rehype-raw";
 import PreviewButton from "./PreviewButton";
 
 const Preview = ({ value, index }) => {
-  const { setMarkDown, setTitle } = useContext(MarkContext);
-  const { state: pageState } = useContext(MarkContext);
-  const [mark, setMark] = useState("");
-  let curr = [];
-  // console.log(pageState[index].markdown);
+
+
 
   const serialize = (nodes) => {
     return nodes
@@ -34,8 +31,7 @@ const Preview = ({ value, index }) => {
       .join("\n\n");
   };
 
-  // serialize(pageState[index].markdown);
-  const htm = "<h1>HOHOHOOHHO</h1>";
+
 
   return (
     <ReactMarkdown className="richEditor">{serialize(value)}</ReactMarkdown>
