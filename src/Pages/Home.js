@@ -4,7 +4,14 @@ import TitleList from "../Components/SplitComponent/TitleList";
 import SideBar from "../Components/SplitComponent/SideBar";
 import MarkDownSection from "../Components/SplitComponent/MarkDown";
 import MarkDown from "../Components/SplitComponent/MarkDown";
+import useWindowDimensions from "../Utilities/Helpers/useWindowSize";
+
+
 const Home = () => {
+  const { height, width } = useWindowDimensions();
+  console.log(height);
+  console.log(width);
+
   const [id, setID] = useState(0);
   const handleID = (value) => {
     setID(value);
@@ -14,7 +21,7 @@ const Home = () => {
   return (
     <Split
       direction="horizontal"
-      sizes={[15, 20, 65]}
+      sizes= {width<1332? [20, 20, 60]: [15, 20, 65]}
       cursor="col-resize"
       expandToMin={false}
       gutter={(index, direction) => {
@@ -33,18 +40,16 @@ const Home = () => {
         return gutter;
       }}
       snapOffset={1}
-      minSize={[200, 300, 500]}
+      minSize={[200, 300, 600]}
       gutterSize={size}
       gutterAlign="center"
       dragInterval={1}
-    
       style={{
         height: "100vh",
         backgroundColor: "#eeeeee",
         display: "flex",
         flexDirection: "row",
-  boxSizing:"border-box"
-
+        boxSizing: "border-box",
       }}
     >
       <SideBar />

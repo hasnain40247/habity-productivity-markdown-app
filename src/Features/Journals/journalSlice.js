@@ -75,6 +75,17 @@ export const counterSlice = createSlice({
         }
       });
     },
+    onChangePageTitle: (state, action) => {
+      state.journals.map((e) => {
+        if (e.journalId === state.selectedJournal) {
+          e.pages.map((i)=>{
+if(i.pageId===e.selectedPage){
+  i.pageName=action.payload
+}
+          })
+        }
+      });
+    },
   },
 });
 
@@ -84,6 +95,7 @@ export const {
   setPage,
   setJournal,
   onChangeJournalTitle,
+  onChangePageTitle
 } = counterSlice.actions;
 
 export default counterSlice.reducer;

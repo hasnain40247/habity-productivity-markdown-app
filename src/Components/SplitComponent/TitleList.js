@@ -13,11 +13,11 @@ const TitleList = ({ handleID }) => {
     <div className="titlelistbackground">
       <TitleHeader name={journal[0].journalName} />
 
-
-<TitleScrollSection  selectedPage={journal[0].selectedPage} pages={journal[0].pages}  handleID={handleID} />
-
-
-      
+      <TitleScrollSection
+        selectedPage={journal[0].selectedPage}
+        pages={journal[0].pages}
+        handleID={handleID}
+      />
     </div>
   );
 };

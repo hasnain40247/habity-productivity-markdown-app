@@ -15,7 +15,7 @@ const PreviewButton = ({ buttonstate, toggle }) => {
               alignItems: "center",
               color: "#272822",
 
-              margin: "0px 5px",
+           marginLeft:"5px",
               borderRadius: "6px",
               padding: "5px",
             }}

@@ -20,21 +20,28 @@ import {
   addBlockStyleList,
   handleEnter,
 } from "../../Utilities/Helpers/OnClickHandler";
+import { useSelector } from "react-redux";
 
 const SlateEditor = ({ index }) => {
-  // const { state: pageState } = useContext(Context);
-
+  const journal = useSelector((state) => state.journal.selectedJournal);
+  const pages = useSelector((state) =>
+    state.journal.journals.filter((e) => e.journalId === journal)
+  );
+  const page = pages[0].pages.filter(
+    (e) => e.pageId === pages[0].selectedPage
+  )[0];
   const [editor] = useState(() => withReact(createEditor()));
   const [value, setValue] = useState(initialValue);
-
   const [toggle, setToggle] = useState(0);
   const handleToggle = () => setToggle(toggle === 0 ? 1 : 0);
 
   return (
     <div
       style={{
-        flexDirection: "column",
         display: "flex",
+
+        flexDirection: "column",
+        padding: "5% 10% 3px",
         boxSizing: "border-box",
       }}
     >
@@ -44,14 +51,9 @@ const SlateEditor = ({ index }) => {
           value={value}
           onChange={(change) => setValue(change)}
         >
-          <ToolBar
-            editor={editor}
-            toggle={toggle}
-            handleToggle={handleToggle}
-          />
+          <ToolBar editor={editor} page={page} handleToggle={handleToggle} toggle={toggle} />
           {toggle === 0 ? (
             <Editable
-              // onDOMBeforeInput={handleDOMBeforeInput}
               decorate={([node, path]) => renderDecorator([node, path, editor])}
               renderLeaf={renderLeaf}
               renderElement={renderElement}
@@ -72,6 +74,26 @@ const SlateEditor = ({ index }) => {
         <EmptySection />
       )}
     </div>
+
+    // {toggle === 0 ? (
+    //   <Editable
+    //     // onDOMBeforeInput={handleDOMBeforeInput}
+    //     decorate={([node, path]) => renderDecorator([node, path, editor])}
+    //     renderLeaf={renderLeaf}
+    //     renderElement={renderElement}
+    //     placeholder="Write some markdown..."
+    //     onKeyDown={(event) => {
+    //       if (event.code === "Enter") {
+    //         event.preventDefault();
+    //         handleEnter("list-item", editor);
+    //       }
+    //     }}
+    //     className="richEditor markfont"
+    //   />
+    // ) : (
+    //   <Preview index={index} value={value} />
+    // )}
+
     // <Slate
     //   editor={pageState[index].editor}
     //   key={pageState[index].id}

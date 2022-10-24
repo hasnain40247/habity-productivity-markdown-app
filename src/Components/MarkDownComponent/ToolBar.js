@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 import MarkDownHeader from "./MarkDownHeader";
 import StyleButtons from "./StyleButtons";
 
-const ToolBar = ({ handleToggle, toggle,editor }) => {
+const ToolBar = ({ editor,page, toggle,handleToggle }) => {
+
   return (
     <div className="toolbar">
-      <MarkDownHeader toggle={toggle} handleToggle={handleToggle} />
+      <MarkDownHeader page={page} toggle={toggle} handleToggle={handleToggle} />
 
-     {toggle===0? <StyleButtons editor={editor} />:null}
+      {toggle === 0 ? <StyleButtons editor={editor} /> : null}
     </div>
   );
 };
