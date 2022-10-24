@@ -18,10 +18,7 @@ import { Node } from "slate";
 import rehypeRaw from "rehype-raw";
 import PreviewButton from "./PreviewButton";
 
-const Preview = ({ value, index }) => {
-
-
-
+const Preview = ({ value }) => {
   const serialize = (nodes) => {
     return nodes
       .map(function (n) {
@@ -30,8 +27,6 @@ const Preview = ({ value, index }) => {
       })
       .join("\n\n");
   };
-
-
 
   return (
     <ReactMarkdown className="richEditor">{serialize(value)}</ReactMarkdown>

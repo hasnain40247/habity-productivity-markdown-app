@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import MarkDownHeader from "./MarkDownHeader";
 import StyleButtons from "./StyleButtons";
 
-const ToolBar = ({ editor,page, toggle,handleToggle }) => {
+const ToolBar = ({ editor,pageName, toggle,handleToggle }) => {
 
   return (
     <div className="toolbar">
-      <MarkDownHeader page={page} toggle={toggle} handleToggle={handleToggle} />
+      <MarkDownHeader pageName={pageName} toggle={toggle} handleToggle={handleToggle} />
 
       {toggle === 0 ? <StyleButtons editor={editor} /> : null}
     </div>

@@ -1,8 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { createEditor } from "slate";
+import { withReact } from "slate-react";
 import { v4 as uuid } from "uuid";
+import { initialValue } from "../../Utilities/Helpers/InitialState";
 
 let initialJournalID = uuid();
 let initialPageID = uuid();
+let initialMarkdown = [
+  {
+    type: "paragraph",
+    children: [
+      {
+        text: "",
+      },
+    ],
+  },
+];
 
 const initialState = {
   journals: [
@@ -13,6 +26,7 @@ const initialState = {
         {
           pageId: initialPageID,
           pageName: "Untitled",
+          pageMarkdown: initialMarkdown,
         },
       ],
       selectedPage: initialPageID,
@@ -36,6 +50,7 @@ export const counterSlice = createSlice({
           {
             pageId: PageID,
             pageName: "Untitled",
+            pageMarkdown: initialMarkdown,
           },
         ],
         selectedPage: PageID,
@@ -47,7 +62,9 @@ export const counterSlice = createSlice({
       let pageId = uuid();
       let newPage = {
         pageId: pageId,
+
         pageName: "Untitled",
+        pageMarkdown: initialMarkdown,
       };
 
       state.journals.map((e) => {
@@ -78,11 +95,22 @@ export const counterSlice = createSlice({
     onChangePageTitle: (state, action) => {
       state.journals.map((e) => {
         if (e.journalId === state.selectedJournal) {
-          e.pages.map((i)=>{
-if(i.pageId===e.selectedPage){
-  i.pageName=action.payload
-}
-          })
+          e.pages.map((i) => {
+            if (i.pageId === e.selectedPage) {
+              i.pageName = action.payload;
+            }
+          });
+        }
+      });
+    },
+    onChangePageContent: (state, action) => {
+      state.journals.map((e) => {
+        if (e.journalId === state.selectedJournal) {
+          e.pages.map((i) => {
+            if (i.pageId === e.selectedPage) {
+              i.pageMarkdown = action.payload;
+            }
+          });
         }
       });
     },
@@ -95,7 +123,8 @@ export const {
   setPage,
   setJournal,
   onChangeJournalTitle,
-  onChangePageTitle
+  onChangePageTitle,
+  onChangePageContent,
 } = counterSlice.actions;
 
 export default counterSlice.reducer;

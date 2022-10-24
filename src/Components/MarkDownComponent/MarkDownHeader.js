@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { onChangePageTitle } from "../../Features/Journals/journalSlice";
 import DeleteButtton from "./DeleteButton";
 import PreviewButton from "./PreviewButton";
-const MarkDownHeader = ({ page, handleToggle, toggle }) => {
+const MarkDownHeader = ({ pageName, handleToggle, toggle }) => {
   const dispatch = useDispatch();
   return (
     <div
@@ -26,14 +26,14 @@ const MarkDownHeader = ({ page, handleToggle, toggle }) => {
           <input
             className="titleArea"
             style={{
-              width: `${page.pageName.length + 1}ch`,
+              width: `${pageName.length + 1}ch`,
               maxWidth: "90%",
               minWidth: "10%",
             }}
             onChange={(text) => {
               dispatch(onChangePageTitle(text.target.value));
             }}
-            value={page.pageName}
+            value={pageName}
           />
         </h5>
       </div>

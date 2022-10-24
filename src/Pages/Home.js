@@ -6,7 +6,6 @@ import MarkDownSection from "../Components/SplitComponent/MarkDown";
 import MarkDown from "../Components/SplitComponent/MarkDown";
 import useWindowDimensions from "../Utilities/Helpers/useWindowSize";
 
-
 const Home = () => {
   const { height, width } = useWindowDimensions();
   console.log(height);
@@ -21,7 +20,7 @@ const Home = () => {
   return (
     <Split
       direction="horizontal"
-      sizes= {width<1332? [20, 20, 60]: [15, 20, 65]}
+      sizes={width < 1332 ? [20, 20, 60] : [15, 20, 65]}
       cursor="col-resize"
       expandToMin={false}
       gutter={(index, direction) => {
@@ -54,7 +53,7 @@ const Home = () => {
     >
       <SideBar />
       <TitleList handleID={handleID} />
-      <MarkDown id={id} />
+      <MarkDown  />
     </Split>
   );
 };
