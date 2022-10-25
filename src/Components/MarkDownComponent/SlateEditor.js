@@ -34,9 +34,12 @@ const SlateEditor = () => {
   const pages = useSelector((state) =>
     state.journal.journals.filter((e) => e.journalId === journal)
   );
-  const page = pages[0].pages.filter(
-    (e) => e.pageId === pages[0].selectedPage
-  )[0];
+
+
+  const page = pages[0]
+    ? pages[0].pages.filter((e) => e.pageId === pages[0].selectedPage)[0]
+    : null;
+
   const [value, setValue] = useState(initialValue);
   const [toggle, setToggle] = useState(0);
 
@@ -44,9 +47,12 @@ const SlateEditor = () => {
 
   const [editor] = useState(() => withReact(createEditor()));
 
+  
+
   useEffect(() => {
-    LoadMarkDown(editor, page.pageMarkdown);
-  }, [pages[0].selectedPage]);
+    console.log(page);
+    if (page) LoadMarkDown(editor, page.pageMarkdown);
+  }, [page]);
 
   const handleChange = useCallback(() => {
     dispatch(onChangePageContent(value));
@@ -61,7 +67,7 @@ const SlateEditor = () => {
         boxSizing: "border-box",
       }}
     >
-      {1 > 0 ? (
+      {page? (
         <Slate
           editor={editor}
           value={value}

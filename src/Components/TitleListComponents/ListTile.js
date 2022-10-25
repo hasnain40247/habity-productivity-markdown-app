@@ -2,9 +2,10 @@ import { MotionConfig } from "framer-motion";
 import React, { useState } from "react";
 import { TbMinusVertical } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
-import { setPage } from "../../Features/Journals/journalSlice";
+import { deletePage, setPage } from "../../Features/Journals/journalSlice";
 import "../../Styles/titlelistStyles.css";
 import { motion } from "framer-motion";
+import { TiDelete } from "react-icons/ti";
 
 const ListTile = ({ id, name, handleID, selectedPage }) => {
   const [click, setClick] = useState(false);
@@ -12,8 +13,8 @@ const ListTile = ({ id, name, handleID, selectedPage }) => {
 
   return (
     <motion.div
-      initial={{  scale: 0.96 }}
-      animate={{  scale: 1 }}
+      initial={{ scale: 0.96 }}
+      animate={{ scale: 1 }}
       transition={{
         default: {
           duration: 1,
@@ -26,33 +27,37 @@ const ListTile = ({ id, name, handleID, selectedPage }) => {
           restDelta: 0.001,
         },
       }}
-      onClick={() => {
-        dispatch(setPage(id));
-      }}
+ 
       className="title"
       style={{
         backgroundColor: selectedPage === id ? "#fff1d0" : "transparent",
         color: selectedPage === id ? "#222831" : "#393E46",
         fontWeight: selectedPage === id ? "bold" : "normal",
+        justifyContent: "space-between",
+        borderLeft: selectedPage === id ? "solid 3px #222831" : "none",
       }}
     >
-      {selectedPage === id ? (
-        <div
-          style={{
-            borderLeft: "solid 4px #222831",
-            height: "100%",
-            marginRight: "5px",
-          }}
-        />
-      ) : null}
-
       <h5
+          onClick={() => {
+            dispatch(setPage(id));
+          }}
         style={{
           fontSize: "0.7rem",
+          marginLeft: selectedPage === id ? "4px" : "0",
+          flex:1
         }}
       >
         {name}
       </h5>
+
+      <TiDelete
+      className="deleteIcon"
+        onClick={() => dispatch(deletePage(id))}
+        style={{
+          fontSize: "1.2rem",
+          cursor: "pointer",
+        }}
+      />
     </motion.div>
   );
 };

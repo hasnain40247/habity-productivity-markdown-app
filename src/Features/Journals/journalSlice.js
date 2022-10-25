@@ -58,6 +58,17 @@ export const counterSlice = createSlice({
       state.selectedJournal = JournalID;
       state.journals.push(newJournal);
     },
+    deleteJournal: (state, action) => {
+      state.journals = state.journals.filter(
+        (e) => e.journalId != action.payload
+      );
+
+      if (state.selectedJournal === action.payload) {
+        if (state.journals.length > 0)
+          state.selectedJournal = state.journals[0].journalId;
+        else state.selectedJournal = null;
+      }
+    },
     addPage: (state, action) => {
       let pageId = uuid();
       let newPage = {
@@ -71,6 +82,19 @@ export const counterSlice = createSlice({
         if (e.journalId === state.selectedJournal) {
           e.pages.push(newPage);
           e.selectedPage = pageId;
+        }
+      });
+    },
+    deletePage: (state, action) => {
+      console.log(action.payload);
+      state.journals.map((e) => {
+        if (e.journalId === state.selectedJournal) {
+          e.pages = e.pages.filter((i) => i.pageId != action.payload);
+          console.log(e.pages);
+          if (e.selectedPage === action.payload) {
+            if (e.pages.length > 0) e.selectedPage = e.pages[0].pageId;
+            else e.selectedPage = null;
+          }
         }
       });
     },
@@ -119,7 +143,9 @@ export const counterSlice = createSlice({
 
 export const {
   addJournal,
+  deleteJournal,
   addPage,
+  deletePage,
   setPage,
   setJournal,
   onChangeJournalTitle,

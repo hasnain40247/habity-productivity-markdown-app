@@ -1,7 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setJournal } from "../../Features/Journals/journalSlice";
+import {
+  deleteJournal,
+  setJournal,
+} from "../../Features/Journals/journalSlice";
 import { motion } from "framer-motion";
+import { TiDelete } from "react-icons/ti";
 
 const TitleTag = ({ title, currentId }) => {
   const selected = useSelector((state) => state.journal.selectedJournal);
@@ -23,12 +27,15 @@ const TitleTag = ({ title, currentId }) => {
           restDelta: 0.001,
         },
       }}
-      onClick={() => dispatch(setJournal(currentId))}
       style={{
         color: selected === currentId ? "#222831" : "#EEEEEE",
         fontWeight: selected === currentId ? "bold" : "normal",
         cursor: "pointer",
         fontSize: "0.8rem",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
 
         backgroundColor: selected === currentId ? "#FFD369" : "#393E46",
         padding: "10px",
@@ -36,7 +43,25 @@ const TitleTag = ({ title, currentId }) => {
         margin: "7px 0",
       }}
     >
-      {title}
+      <div
+        style={{
+          flex: 1,
+        }}
+        onClick={() => dispatch(setJournal(currentId))}
+      >
+        {title}
+      </div>
+      <TiDelete
+      className="deleteIcon"
+        onClick={() => {
+          console.log("click");
+          dispatch(deleteJournal(currentId));
+        }}
+        style={{
+          fontSize: "1.2rem",
+          cursor: "pointer",
+        }}
+      />
     </motion.div>
   );
 };

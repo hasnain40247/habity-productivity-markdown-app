@@ -3,14 +3,12 @@ import React from "react";
 const EmptySection = () => {
   return (
     <div
-      className="markdown empty"
       style={{
-        alignSelf: "center",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-        position: "absolute",
+    display:"flex",
+    flexDirection:"column",
+    alignItems:"center",
+    justifyContent:"center",
+    flex:1
       }}
     >
       <div

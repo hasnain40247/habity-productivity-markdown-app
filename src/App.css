@@ -26,3 +26,9 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #393e46;
 }
+
+
+.deleteIcon:hover{
+  transform: rotate(20deg);
+color: #FF4A4A;
+}
