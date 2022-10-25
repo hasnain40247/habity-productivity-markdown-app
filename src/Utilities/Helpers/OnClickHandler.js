@@ -39,6 +39,7 @@ export const stylemap = {
 };
 
 export const handleEnter = (style, editor, event) => {
+  console.log("hello");
   let listpointer = editor.children.at(-1).children[0].text[0];
   console.log(typeof listpointer);
   Editor.insertSoftBreak(editor);
