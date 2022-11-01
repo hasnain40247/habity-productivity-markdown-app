@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import ListTile from "./ListTile";
 import {TbMinusVertical} from"react-icons/tb"
 
-const TitleScrollSection = ({ handleID, pages, selectedPage }) => {
+const TitleScrollSection = ({ pages, selectedPage }) => {
   return (
     <div className="titleScroll">
       {pages.slice(0).reverse().map((e) => {
@@ -12,7 +12,7 @@ const TitleScrollSection = ({ handleID, pages, selectedPage }) => {
             id={e.pageId}
             name={e.pageName}
             selectedPage={selectedPage}
-            handleID={handleID}
+
             key={e.pageId}
           />
           

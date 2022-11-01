@@ -6,6 +6,9 @@ import { initialValue } from "../../Utilities/Helpers/InitialState";
 
 let initialJournalID = uuid();
 let initialPageID = uuid();
+let initialHabitID = uuid();
+let initialStampID = uuid();
+
 let initialMarkdown = [
   {
     type: "paragraph",
@@ -32,7 +35,20 @@ const initialState = {
       selectedPage: initialPageID,
     },
   ],
-  selectedJournal: initialJournalID,
+  habits: [
+    {
+      habitId: initialHabitID,
+      habitName: "Untitled",
+      stamps: [
+        {
+          date: new Date("2021-03-25"),
+          level: 0,
+        },
+      ],
+      selectedStamp: initialStampID,
+    },
+  ],
+  selected: { type: "Journal", selectID: initialJournalID },
 };
 
 export const counterSlice = createSlice({
@@ -55,7 +71,7 @@ export const counterSlice = createSlice({
         ],
         selectedPage: PageID,
       };
-      state.selectedJournal = JournalID;
+      state.selected = { type: "Journal", selectID: JournalID };
       state.journals.push(newJournal);
     },
     deleteJournal: (state, action) => {
@@ -63,10 +79,17 @@ export const counterSlice = createSlice({
         (e) => e.journalId != action.payload
       );
 
-      if (state.selectedJournal === action.payload) {
+      if (state.selected.selectID === action.payload) {
         if (state.journals.length > 0)
-          state.selectedJournal = state.journals[0].journalId;
-        else state.selectedJournal = null;
+          state.selected = {
+            type: "Journal",
+            selectID: state.journals[0].journalId,
+          };
+        else
+          state.selected = {
+            type: "Journal",
+            selectID: null,
+          };
       }
     },
     addPage: (state, action) => {
@@ -79,7 +102,7 @@ export const counterSlice = createSlice({
       };
 
       state.journals.map((e) => {
-        if (e.journalId === state.selectedJournal) {
+        if (e.journalId === state.selected.selectID) {
           e.pages.push(newPage);
           e.selectedPage = pageId;
         }
@@ -88,7 +111,7 @@ export const counterSlice = createSlice({
     deletePage: (state, action) => {
       console.log(action.payload);
       state.journals.map((e) => {
-        if (e.journalId === state.selectedJournal) {
+        if (e.journalId === state.selected.selectID) {
           e.pages = e.pages.filter((i) => i.pageId != action.payload);
           console.log(e.pages);
           if (e.selectedPage === action.payload) {
@@ -99,11 +122,14 @@ export const counterSlice = createSlice({
       });
     },
     setJournal: (state, action) => {
-      state.selectedJournal = action.payload;
+      state.selected = { type: "Journal", selectID: action.payload };
+    },
+    setHabit: (state, action) => {
+      state.selected = { type: "Habit", selectID: null };
     },
     setPage: (state, action) => {
       state.journals.map((e) => {
-        if (e.journalId === state.selectedJournal) {
+        if (e.journalId === state.selected.selectID) {
           e.selectedPage = action.payload;
         }
       });
@@ -111,14 +137,14 @@ export const counterSlice = createSlice({
 
     onChangeJournalTitle: (state, action) => {
       state.journals.map((e) => {
-        if (e.journalId === state.selectedJournal) {
+        if (e.journalId === state.selected.selectID) {
           e.journalName = action.payload;
         }
       });
     },
     onChangePageTitle: (state, action) => {
       state.journals.map((e) => {
-        if (e.journalId === state.selectedJournal) {
+        if (e.journalId === state.selected.selectID) {
           e.pages.map((i) => {
             if (i.pageId === e.selectedPage) {
               i.pageName = action.payload;
@@ -129,7 +155,7 @@ export const counterSlice = createSlice({
     },
     onChangePageContent: (state, action) => {
       state.journals.map((e) => {
-        if (e.journalId === state.selectedJournal) {
+        if (e.journalId === state.selected.selectID) {
           e.pages.map((i) => {
             if (i.pageId === e.selectedPage) {
               i.pageMarkdown = action.payload;
@@ -137,6 +163,25 @@ export const counterSlice = createSlice({
           });
         }
       });
+    },
+
+    // Habit Slice Reducer
+    addHabit: (state) => {
+      console.log("hello");
+      let habitID = uuid();
+
+      let newHabit = {
+        habitId: habitID,
+        habitName: "Untitled2",
+        stamps: [
+          {
+            date: new Date("2021-03-27"),
+            level: 0,
+          },
+        ],
+      };
+      state.selected = { type: "Habit", selectID: habitID };
+      state.habits.push(newHabit);
     },
   },
 });
@@ -148,9 +193,14 @@ export const {
   deletePage,
   setPage,
   setJournal,
+  setHabit,
   onChangeJournalTitle,
   onChangePageTitle,
   onChangePageContent,
+
+  // Habit Reducer Fuctions
+
+  addHabit,
 } = counterSlice.actions;
 
 export default counterSlice.reducer;

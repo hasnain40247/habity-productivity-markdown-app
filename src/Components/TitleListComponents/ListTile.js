@@ -7,7 +7,7 @@ import "../../Styles/titlelistStyles.css";
 import { motion } from "framer-motion";
 import { TiDelete } from "react-icons/ti";
 
-const ListTile = ({ id, name, handleID, selectedPage }) => {
+const ListTile = ({ id, name, selectedPage }) => {
   const [click, setClick] = useState(false);
   let dispatch = useDispatch();
 

@@ -8,13 +8,6 @@ import useWindowDimensions from "../Utilities/Helpers/useWindowSize";
 
 const Home = () => {
   const { height, width } = useWindowDimensions();
-  console.log(height);
-  console.log(width);
-
-  const [id, setID] = useState(0);
-  const handleID = (value) => {
-    setID(value);
-  };
   const [size, setSize] = useState(1);
 
   return (
@@ -52,7 +45,7 @@ const Home = () => {
       }}
     >
       <SideBar />
-      <TitleList handleID={handleID} />
+      <TitleList  />
       <MarkDown  />
     </Split>
   );

@@ -30,7 +30,18 @@
 
   text-align: center;
 }
+.typeheader{
+  -webkit-filter: drop-shadow(3px 3px 10px rgb(2,2,2));
+  filter: drop-shadow(3px 3px 10px rgb(2, 2, 2));
+  color: #FFD369;
+  font-family: Montserrat;
+  display: flex;
+  flex-direction: column;
+  font-weight: bolder;
+  padding: 0% 4%;
 
+  font-size: 1rem;
+}
 .logo {
   -webkit-filter: drop-shadow(3px 3px 10px rgb(9, 27, 27));
   filter: drop-shadow(3px 3px 10px rgb(29, 27, 27));

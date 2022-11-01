@@ -8,9 +8,10 @@ import { motion } from "framer-motion";
 import { TiDelete } from "react-icons/ti";
 
 const TitleTag = ({ title, currentId }) => {
-  const selected = useSelector((state) => state.journal.selectedJournal);
+  const selected = useSelector((state) => state.journal.selected);
   const dispatch = useDispatch();
   console.log(selected);
+
   return (
     <motion.div
       initial={{ scale: 0.93 }}
@@ -28,8 +29,8 @@ const TitleTag = ({ title, currentId }) => {
         },
       }}
       style={{
-        color: selected === currentId ? "#222831" : "#EEEEEE",
-        fontWeight: selected === currentId ? "bold" : "normal",
+        color: selected.selectID === currentId ? "#222831" : "#EEEEEE",
+        fontWeight: selected.selectID === currentId ? "bold" : "normal",
         cursor: "pointer",
         fontSize: "0.8rem",
         display: "flex",
@@ -37,7 +38,7 @@ const TitleTag = ({ title, currentId }) => {
         justifyContent: "space-between",
         alignItems: "center",
 
-        backgroundColor: selected === currentId ? "#FFD369" : "#393E46",
+        backgroundColor: selected.selectID === currentId ? "#FFD369" : "#393E46",
         padding: "10px",
         borderRadius: "10px",
         margin: "7px 0",

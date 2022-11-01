@@ -30,7 +30,7 @@ import { LoadMarkDown } from "../../Utilities/Helpers/LoadMarkDownFunction";
 import { onChangePageContent } from "../../Features/Journals/journalSlice";
 
 const SlateEditor = () => {
-  const journal = useSelector((state) => state.journal.selectedJournal);
+  const journal = useSelector((state) => state.journal.selected.selectID);
   const pages = useSelector((state) =>
     state.journal.journals.filter((e) => e.journalId === journal)
   );
