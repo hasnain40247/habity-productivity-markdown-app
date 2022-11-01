@@ -30,10 +30,11 @@
 
   text-align: center;
 }
-.typeheader{
-  -webkit-filter: drop-shadow(3px 3px 10px rgb(2,2,2));
+.typeheader {
+  -webkit-filter: drop-shadow(3px 3px 10px rgb(2, 2, 2));
   filter: drop-shadow(3px 3px 10px rgb(2, 2, 2));
-  color: #FFD369;
+  justify-content: space-around;
+  color: #ffd369;
   font-family: Montserrat;
   display: flex;
   flex-direction: column;
@@ -41,6 +42,59 @@
   padding: 0% 4%;
 
   font-size: 1rem;
+}
+
+.typeheaderRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.productivitycontainer {
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: normal;
+  font-family: "Montserrat";
+  word-spacing: 2;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+.tag {
+  margin: 2px;
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 10px;
+}
+.tagshadow {
+  -webkit-filter: drop-shadow(2px 4px 6px #ff4a4a);
+  filter: drop-shadow(2px 4px 6px #ff4a4a);
+}
+.tagtitleshadow {
+  -webkit-filter: drop-shadow(2px 4px 6px #42855b);
+  filter: drop-shadow(2px 4px 6px #42855b);
+}
+
+.productivitycontainer div {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: space-between;
+}
+.typeheaderRow div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.typeheader .typeicon {
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.typeheaderRow div p {
+  margin-left: 10px;
+  font-weight: bolder;
 }
 .logo {
   -webkit-filter: drop-shadow(3px 3px 10px rgb(9, 27, 27));

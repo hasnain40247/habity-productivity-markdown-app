@@ -38,7 +38,7 @@ const initialState = {
   habits: [
     {
       habitId: initialHabitID,
-      habitName: "Untitled",
+      habitName: "Task",
       stamps: [
         {
           date: new Date("2021-03-25"),
@@ -125,7 +125,25 @@ export const counterSlice = createSlice({
       state.selected = { type: "Journal", selectID: action.payload };
     },
     setHabit: (state, action) => {
-      state.selected = { type: "Habit", selectID: null };
+      console.log("hello");
+      if (action.payload) {
+        state.selected = {
+          type: "Habit",
+          selectID: action.payload,
+        };
+      } else {
+        if (state.habits.length > 0)
+          state.selected = {
+            type: "Habit",
+            selectID: state.habits[state.habits.length - 1].habitId,
+          };
+        else {
+          state.selected = {
+            type: "Habit",
+            selectID: null,
+          };
+        }
+      }
     },
     setPage: (state, action) => {
       state.journals.map((e) => {
@@ -167,12 +185,11 @@ export const counterSlice = createSlice({
 
     // Habit Slice Reducer
     addHabit: (state) => {
-      console.log("hello");
-      let habitID = uuid();
+      let habit = uuid();
 
       let newHabit = {
-        habitId: habitID,
-        habitName: "Untitled2",
+        habitId: habit,
+        habitName: "New Task",
         stamps: [
           {
             date: new Date("2021-03-27"),
@@ -180,8 +197,11 @@ export const counterSlice = createSlice({
           },
         ],
       };
-      state.selected = { type: "Habit", selectID: habitID };
+
       state.habits.push(newHabit);
+
+      state.selected = { type: "Habit", selectID: habit };
+      console.log(state.selected);
     },
   },
 });

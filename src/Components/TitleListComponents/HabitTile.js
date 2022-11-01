@@ -1,17 +1,17 @@
-import { MotionConfig } from "framer-motion";
 import React, { useState } from "react";
-import { TbMinusVertical } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePage, setPage } from "../../Features/Journals/journalSlice";
+import {
+  deletePage,
+  setHabit,
+  setPage,
+} from "../../Features/Journals/journalSlice";
 import "../../Styles/titlelistStyles.css";
 import { motion } from "framer-motion";
 import { TiDelete } from "react-icons/ti";
 
-const ListTile = ({ id, name, selectedPage }) => {
-  const [click, setClick] = useState(false);
+const HabitTile = ({ id, name }) => {
   let dispatch = useDispatch();
-  console.log(selectedPage);
-  console.log(id);
+  const selectedID = useSelector((state) => state.journal.selected.selectID);
 
   return (
     <motion.div
@@ -29,31 +29,30 @@ const ListTile = ({ id, name, selectedPage }) => {
           restDelta: 0.001,
         },
       }}
- 
       className="title"
       style={{
-        backgroundColor: selectedPage === id ? "#fff1d0" : "transparent",
-        color: selectedPage === id ? "#222831" : "#393E46",
-        fontWeight: selectedPage === id ? "bold" : "normal",
+        backgroundColor: selectedID === id ? "#fff1d0" : "transparent",
+        color: selectedID === id ? "#222831" : "#393E46",
+        fontWeight: selectedID === id ? "bold" : "normal",
         justifyContent: "space-between",
-        borderLeft: selectedPage === id ? "solid 3px #222831" : "none",
+        borderLeft: selectedID === id ? "solid 3px #222831" : "none",
       }}
     >
       <h5
-          onClick={() => {
-            dispatch(setPage(id));
-          }}
+        onClick={() => {
+          dispatch(setHabit(id));
+        }}
         style={{
           fontSize: "0.7rem",
-          marginLeft: selectedPage === id ? "4px" : "0",
-          flex:1
+          marginLeft: selectedID === id ? "4px" : "0",
+          flex: 1,
         }}
       >
         {name}
       </h5>
 
       <TiDelete
-      className="deleteIcon"
+        className="deleteIcon"
         onClick={() => dispatch(deletePage(id))}
         style={{
           fontSize: "1.2rem",
@@ -64,4 +63,4 @@ const ListTile = ({ id, name, selectedPage }) => {
   );
 };
 
-export default ListTile;
+export default HabitTile;

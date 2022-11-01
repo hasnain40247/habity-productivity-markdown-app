@@ -21,49 +21,34 @@ const TypeHeader = ({ type }) => {
       className="typeheader"
       style={{
         marginTop: type === "Habits" ? "10px" : "5px",
-        borderRadius: type === "Habits" ? "5px" : "0",
+        borderRadius: type === "Habits" ? "10px" : "0",
         backgroundColor:
           type === "Habits"
             ? selected === "Habit"
-              ? 
-            "#EEEEEE":"#749F82"
+              ? "#FFD369"
+              : "#393E46"
             : "transparent",
         color:
           type === "Habits"
             ? selected === "Habit"
-              ?      "#222831":"#393E46"
-         
+              ? "#222831"
+              : "#EEEEEE"
             : "#FFD369",
 
         cursor: type === "Habits" ? "pointer" : "default",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
+      <div className="typeheaderRow">
+        <div>
           {type === "Habits" ? <RiMentalHealthFill /> : <GoPencil />}
           <p
             style={{
               color:
                 type === "Habits"
                   ? selected === "Habit"
-                    ? "#222831":"#393E46"
+                    ? "#222831"
+                    : "#EEEEEE"
                   : "#EEEEEE",
-
-              marginLeft: "10px",
-              fontWeight: "bolder",
             }}
           >
             {type}
@@ -72,38 +57,46 @@ const TypeHeader = ({ type }) => {
 
         <MdOutlineAdd
           onClick={() => {
-            type === "Habits" ? dispatch(addHabit()) : dispatch(addJournal());
+            if (type === "Habits") {
+              dispatch(addHabit());
+            } else {
+              dispatch(addJournal());
+            }
           }}
-          style={{
-            fontSize: "1.3rem",
-            cursor: "pointer",
-          }}
+          className="typeicon"
         />
       </div>
-{type==="Habits"?
-
-
-<div style={{
-    
-  borderRadius:"10px",
-  display:"flex",
-  flexDirection:"column",
-  padding:"10px"
- }}>
-  <h6 style={{margin:0}}>Track Your Productivity</h6>
- <div style={{
-  display:"flex",
-  flexDirection:"row",
-  alignItems:"center",
-  justifyContent:"space-between"
- }}>
-
-<h6 style={{margin:0}}>Today</h6>
-  <h6 style={{margin:0, backgroundColor:"#FF6464", padding:"5px", borderRadius:"10px"}}>Active</h6>
- </div>
-
-
- </div>:null}
+      {type === "Habits" ? (
+        <div className="productivitycontainer">
+          <p
+            style={{
+              margin: "3px 0",
+              fontWeight: "bold",
+            }}
+          >
+            Track Your Productivity
+          </p>
+          <div>
+            <p
+              className={selected === "Habit" ? "tagtitleshadow" : ""}
+              style={{
+                fontWeight: selected === "Habit" ? "bolder" : "bold",
+                color: "#42855B",
+              }}
+            >
+              Today
+            </p>
+            <p
+              className={selected === "Habit" ? "tagshadow tag" : "tag"}
+              style={{
+                backgroundColor: "#FF4A4A",
+              }}
+            >
+              Active
+            </p>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

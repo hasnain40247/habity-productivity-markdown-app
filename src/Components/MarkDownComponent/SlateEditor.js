@@ -62,8 +62,9 @@ const SlateEditor = () => {
     <div
       style={{
         display: "flex",
+        backgroundColor:"red",
+        height:"100%",
         flexDirection: "column",
-        padding: "5% 10% 3px",
         boxSizing: "border-box",
       }}
     >
