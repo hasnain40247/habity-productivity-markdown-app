@@ -103,3 +103,19 @@
   background-color: transparent;
   height: 30px;
 }
+
+.graphdiv {
+  overflow-x: auto;
+}
+.graphdiv::-webkit-scrollbar {
+  height: 2px;
+}
+
+.graphdiv::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+.graphdiv::-webkit-scrollbar-thumb {
+  background: #ffd369;
+}

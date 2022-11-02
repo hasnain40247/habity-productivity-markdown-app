@@ -3,11 +3,32 @@ import { createEditor } from "slate";
 import { withReact } from "slate-react";
 import { v4 as uuid } from "uuid";
 import { initialValue } from "../../Utilities/Helpers/InitialState";
+import moment from "moment";
 
 let initialJournalID = uuid();
 let initialPageID = uuid();
 let initialHabitID = uuid();
 let initialStampID = uuid();
+
+const DAYS = () => {
+  const days = [];
+  let dateStart = moment().subtract(1, "year");
+
+  const dateEnd = moment();
+  console.log(dateEnd.diff(dateStart, "days"));
+
+  while (dateEnd.diff(dateStart, "days") >= 0) {
+    days.push({
+      id: uuid(),
+      date: dateStart.format("YYYY-MM-DD"),
+
+      total: 0,
+      details: [],
+    });
+    dateStart.add(1, "days");
+  }
+  return days;
+};
 
 let initialMarkdown = [
   {
@@ -39,12 +60,7 @@ const initialState = {
     {
       habitId: initialHabitID,
       habitName: "Task",
-      stamps: [
-        {
-          date: new Date("2021-03-25"),
-          level: 0,
-        },
-      ],
+      stamps: DAYS(),
       selectedStamp: initialStampID,
     },
   ],
@@ -190,12 +206,9 @@ export const counterSlice = createSlice({
       let newHabit = {
         habitId: habit,
         habitName: "New Task",
-        stamps: [
-          {
-            date: new Date("2021-03-27"),
-            level: 0,
-          },
-        ],
+
+        stamps: DAYS(),
+        // selectedStamp: initialStampID,
       };
 
       state.habits.push(newHabit);

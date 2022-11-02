@@ -62,10 +62,11 @@ const SlateEditor = () => {
     <div
       style={{
         display: "flex",
-        backgroundColor:"red",
         height:"100%",
         flexDirection: "column",
         boxSizing: "border-box",
+            padding: "5% 15% 3px",
+
       }}
     >
       {page? (

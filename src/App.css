@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Space+Mono&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300;400;500;600;700&display=swap");
 html,
 body {
   margin: 0;
@@ -27,11 +27,90 @@ body {
   background: #393e46;
 }
 
-
-.deleteIcon:hover{
+.deleteIcon:hover {
   transform: rotate(20deg);
-color: #FF4A4A;
+  color: #ff4a4a;
 }
 
+:root {
+  --cell_height: 10px;
+  --cell_width: 10px;
+  --cell_margin: 2px;
+  --cell_weekdays_width: 30px;
+}
 
+#container {
+  height: 514px;
+  width: 930px;
+  margin: 50px auto;
+}
 
+.timeline {
+  margin: 20px;
+  margin-bottom: 60px;
+  
+}
+
+.timeline-weekdays {
+  display: inline-flex;
+  flex-direction: column;
+  width: var(--cell_weekdays_width);
+}
+
+.timeline-weekdays-weekday {
+  font-size: 10px;
+  height: var(--cell_height);
+  border: 1px solid transparent;
+  margin: var(--cell_margin);
+  vertical-align: middle;
+}
+.timeline-body {
+  display: flex;
+}
+
+.timeline-cells {
+  display: inline-flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 112px;
+}
+
+.timeline-cells-cell {
+  height: var(--cell_height);
+  width: var(--cell_width);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin: var(--cell_margin);
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.timeline-cells-cell:hover {
+  border: 1px solid  #222831;
+
+}
+
+.timeline-months-month {
+  width: var(--cell_width);
+  margin: var(--cell_margin);
+  border: 1px solid transparent;
+  font-size: 10px;
+}
+.timeline-months {
+  display: flex;
+  padding-left: var(--cell_weekdays_width);
+}
+
+.Jan ~ .Jan,
+.Feb ~ .Feb,
+.Mar ~ .Mar,
+.Apr ~ .Apr,
+.May ~ .May,
+.Jun ~ .Jun,
+.Jul ~ .Jul,
+.Aug ~ .Aug,
+.Sep ~ .Sep,
+.Oct ~ .Oct,
+.Nov ~ .Nov,
+.Dec ~ .Dec {
+  visibility: hidden;
+}
