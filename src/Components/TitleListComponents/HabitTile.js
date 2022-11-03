@@ -32,10 +32,12 @@ const HabitTile = ({ id, name }) => {
       className="title"
       style={{
         backgroundColor: selectedID === id ? "#fff1d0" : "transparent",
+        borderBottom: selectedID===id? "none":"2px solid rgb(67, 67, 67, 0.2)",
+
         color: selectedID === id ? "#222831" : "#393E46",
         fontWeight: selectedID === id ? "bold" : "normal",
         justifyContent: "space-between",
-        borderLeft: selectedID === id ? "solid 3px #222831" : "none",
+        borderLeft: selectedID === id ? "solid 4px #222831" : "none",
       }}
     >
       <h5

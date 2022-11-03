@@ -4,6 +4,9 @@ A completely custom text-editor with dynamic text decoration and element renders
 
 ![alt text](public/mark.png)
 
+![alt text](public/habitpage.png)
+
+
 
 
 

@@ -22,7 +22,7 @@ const DAYS = () => {
       id: uuid(),
       date: dateStart.format("YYYY-MM-DD"),
 
-      total: 0,
+      total: Math.floor(Math.random() * (1000 - 0 + 1) + 0),
       details: [],
     });
     dateStart.add(1, "days");
@@ -216,6 +216,25 @@ export const counterSlice = createSlice({
       state.selected = { type: "Habit", selectID: habit };
       console.log(state.selected);
     },
+    parseHabit: (state, action) => {
+      console.log(action.payload.days);
+      state.habits.map((e) => {
+
+        
+        if (e.habitId === action.payload.id) {
+        console.log(e.stamps.length);
+
+          action.payload.days.map((i) => {
+
+            e.stamps.push(i);
+          });
+
+
+          console.log(e.stamps.length);
+
+        }
+      });
+    },
   },
 });
 
@@ -234,6 +253,7 @@ export const {
   // Habit Reducer Fuctions
 
   addHabit,
+  parseHabit,
 } = counterSlice.actions;
 
 export default counterSlice.reducer;

@@ -22,6 +22,20 @@ const TypeHeader = ({ type }) => {
       style={{
         marginTop: type === "Habits" ? "10px" : "5px",
         borderRadius: type === "Habits" ? "10px" : "0",
+
+        WebFilter:
+          type === "Habits"
+            ? selected === "Habit"
+              ? "drop-shadow(3px 3px 10px rgb(255, 211, 105,0.5))"
+              : "none"
+            : "none",
+
+        filter:
+          type === "Habits"
+            ? selected === "Habit"
+              ? "drop-shadow(3px 3px 10px rgb(255, 211, 105,0.5))"
+              : "none"
+            : "none",
         backgroundColor:
           type === "Habits"
             ? selected === "Habit"

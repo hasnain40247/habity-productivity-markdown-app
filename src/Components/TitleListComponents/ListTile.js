@@ -33,10 +33,12 @@ const ListTile = ({ id, name, selectedPage }) => {
       className="title"
       style={{
         backgroundColor: selectedPage === id ? "#fff1d0" : "transparent",
+        borderBottom: selectedPage===id? "none":"2px solid rgb(67, 67, 67, 0.2)",
+
         color: selectedPage === id ? "#222831" : "#393E46",
         fontWeight: selectedPage === id ? "bold" : "normal",
         justifyContent: "space-between",
-        borderLeft: selectedPage === id ? "solid 3px #222831" : "none",
+        borderLeft: selectedPage === id ? "solid 4px #393E46" : "none",
       }}
     >
       <h5

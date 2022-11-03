@@ -38,7 +38,8 @@ const TitleTag = ({ title, currentId }) => {
         justifyContent: "space-between",
         alignItems: "center",
 
-        backgroundColor: selected.selectID === currentId ? "#FFD369" : "#393E46",
+        backgroundColor:
+          selected.selectID === currentId ? "#FFD369" : "#393E46",
         padding: "10px",
         borderRadius: "10px",
         margin: "7px 0",
@@ -53,7 +54,7 @@ const TitleTag = ({ title, currentId }) => {
         {title}
       </div>
       <TiDelete
-      className="deleteIcon"
+        className="deleteIcon"
         onClick={() => {
           console.log("click");
           dispatch(deleteJournal(currentId));
